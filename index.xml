@@ -12,6 +12,16 @@
     
     
     <item>
+      <title>Channel</title>
+      <link>http://localhost:1313/post/channel/</link>
+      <pubDate>Thu, 30 Apr 2020 21:26:51 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/channel/</guid>
+      <description>channel channel is aaa 11
+what should it ddsss</description>
+    </item>
+    
+    <item>
       <title>About me</title>
       <link>http://localhost:1313/about/</link>
       <pubDate>Wed, 09 Apr 2014 00:00:00 +0000</pubDate>
