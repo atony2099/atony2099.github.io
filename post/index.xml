@@ -6,19 +6,10 @@
     <description>Recent content in Posts on atony2099 develop note</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 01 May 2020 17:01:29 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 30 Apr 2020 21:26:51 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Cpu</title>
-      <link>http://localhost:1313/post/cpu/</link>
-      <pubDate>Fri, 01 May 2020 17:01:29 +0800</pubDate>
-      
-      <guid>http://localhost:1313/post/cpu/</guid>
-      <description>[计算机科学速成课】40集全 Computer - CPU(Central Processing Unit) Architecture of the central processing unit (CPU) Different Classes of CPU Registers cpu control unit: 从内存中获取指令(instructions)，通过控制寄存器单元和运算单</description>
-    </item>
     
     <item>
       <title>深入了解GPS调度</title>
@@ -27,6 +18,15 @@
       
       <guid>http://localhost:1313/post/channel/</guid>
       <description>GPS 1. schedule 2. channel 1. 数据结构 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 type hchan struct { qcount uint // total data in the queue dataqsiz uint // size of the circular queue buf unsafe.Pointer // points to an array of dataqsiz elements elemsize uint16 closed uint32 elemtype *_type // element type sendx</description>
+    </item>
+    
+    <item>
+      <title>Cpu</title>
+      <link>http://localhost:1313/post/cpu/</link>
+      <pubDate>Wed, 01 Apr 2020 17:01:29 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/cpu/</guid>
+      <description>[计算机科学速成课】40集全 Computer - CPU(Central Processing Unit) Architecture of the central processing unit (CPU) Different Classes of CPU Registers cpu control unit: 从内存中获取指令(instructions)，通过控制寄存器单元和运算单</description>
     </item>
     
   </channel>
