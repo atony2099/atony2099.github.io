@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Cpu - atony2099 develop note</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="atony2099" /><meta name="description" content="[计算机科学速成课】40集全 Computer - CPU(Central Processing Unit) Architecture of the central processing unit (CPU) Different Classes of CPU Registers cpu control unit: 从内存中获取指令(instructions)，通过控制寄存器单元和运算单" /><meta name="keywords" content="golang, develop, hugo" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.69.0 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/cpu/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Cpu" />
+<meta property="og:description" content="[计算机科学速成课】40集全 Computer - CPU(Central Processing Unit) Architecture of the central processing unit (CPU) Different Classes of CPU Registers cpu control unit: 从内存中获取指令(instructions)，通过控制寄存器单元和运算单" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/cpu/" />
+<meta property="article:published_time" content="2020-05-01T17:01:29+08:00" />
+<meta property="article:modified_time" content="2020-05-01T17:01:29+08:00" />
+<meta itemprop="name" content="Cpu">
+<meta itemprop="description" content="[计算机科学速成课】40集全 Computer - CPU(Central Processing Unit) Architecture of the central processing unit (CPU) Different Classes of CPU Registers cpu control unit: 从内存中获取指令(instructions)，通过控制寄存器单元和运算单">
+<meta itemprop="datePublished" content="2020-05-01T17:01:29&#43;08:00" />
+<meta itemprop="dateModified" content="2020-05-01T17:01:29&#43;08:00" />
+<meta itemprop="wordCount" content="638">
+
+
+
+<meta itemprop="keywords" content="cpu,计算机基础," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Cpu"/>
+<meta name="twitter:description" content="[计算机科学速成课】40集全 Computer - CPU(Central Processing Unit) Architecture of the central processing unit (CPU) Different Classes of CPU Registers cpu control unit: 从内存中获取指令(instructions)，通过控制寄存器单元和运算单"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">atony2099 develop note</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About me</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">atony2099 develop note</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About me</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Cpu</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-05-01 </span>
+        
+          <span class="more-meta"> 638 words </span>
+          <span class="more-meta"> 2 mins read </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#cpu">cpu</a>
+      <ul>
+        <li><a href="#范例">范例</a></li>
+      </ul>
+    </li>
+    <li><a href="#stack">stack</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>[计算机科学速成课】<a href="https://www.bilibili.com/video/BV1EW411u7thp=12">40集全</a></p>
+<p><a href="https://www.tutorialspoint.com/computer_fundamentals/computer_cpu.htm">Computer - CPU(Central Processing Unit)</a>
+<a href="https://computersciencewiki.org/index.php/Architecture_of_the_central_processing_unit_(CPU)">Architecture of the central processing unit (CPU)</a>
+<a href="https://www.geeksforgeeks.org/different-classes-of-cpu-registers/">Different Classes of CPU Registers</a></p>
+<h2 id="cpu">cpu</h2>
+<p><img src="https://www.tutorialspoint.com/computer_fundamentals/images/computer_architecture.jpg" alt=""></p>
+<ol>
+<li>
+<p>control unit:
+从内存中获取指令(instructions)，通过控制寄存器单元和运算单元完成工作</p>
+</li>
+<li>
+<p>arithmetic unit:
+完成实际的计算</p>
+</li>
+<li>
+<p>memory unit(register):</p>
+<ol>
+<li>PC - program counter - 存储当前指令执行的地址(程序是由一系列指令组成)</li>
+<li>ACC - accumulator - 存储临时计算结果</li>
+<li>MAR- Memory Address Registers: 当前要读写的内存(RAM)数据的地址，(堆栈的地址)</li>
+<li>MDR - memory data register:从内存(RAM)读取或者将要写入内存中的数据</li>
+<li>IR- Instruction Register :  当前正在执行的指令</li>
+</ol>
+<p>CIR - current instruction register - stores actual instruction that is being decoded and executed</p>
+</li>
+</ol>
+<h3 id="范例">范例</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="kt">int</span> <span class="nf">add_a_and_b</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+   <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+   <span class="k">return</span> <span class="n">add_a_and_b</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+<span class="p">}</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<ol>
+<li>32为机器，每个值4个字节 2.stack pointer 指向当前栈的顶部(最低地址)
+编译成汇编之后：</li>
+</ol>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="nl">_main</span><span class="p">:</span> <span class="c1">//为main函数建立一个帧，并将stack pointer 写入 ESP 寄存器器
+</span><span class="c1"></span>   <span class="n">push</span>   <span class="mi">3</span> <span class="c1">// 1.将3写入栈中(将esp寄存器存的stack pointer值取出，减去4个字节（32）位，,将3写入其中，更 Stack Pointer的值
+</span><span class="c1"></span>   <span class="n">push</span>   <span class="mi">2</span> <span class="c1">// 
+</span><span class="c1"></span>   <span class="n">call</span>   <span class="n">_add_a_and_b</span>  <span class="c1">// 3.建立新的帧（没有实际的创建操作）
+</span><span class="c1"></span>   <span class="n">add</span>    <span class="o">%</span><span class="n">esp</span><span class="p">,</span> <span class="mi">8</span> <span class="c1">// 10 stack pointer + 8位，即回收8个地址
+</span><span class="c1"></span>   <span class="n">ret</span>
+
+<span class="nl">_add_a_and_b</span><span class="p">:</span>
+   <span class="n">push</span>   <span class="o">%</span><span class="n">ebx</span> <span class="c1">// 4. 将寄存器ebx上的值写入栈中（stack pointer值已经增加12）
+</span><span class="c1"></span>   <span class="n">mov</span>    <span class="o">%</span><span class="n">eax</span><span class="p">,</span> <span class="p">[</span><span class="o">%</span><span class="n">esp</span><span class="o">+</span><span class="mi">8</span><span class="p">]</span>  <span class="c1">// 5. 将  stack pointer + 8位（2）上的值写入寄存器eax中
+</span><span class="c1"></span>   <span class="n">mov</span>    <span class="o">%</span><span class="n">ebx</span><span class="p">,</span> <span class="p">[</span><span class="o">%</span><span class="n">esp</span><span class="o">+</span><span class="mi">12</span><span class="p">]</span> <span class="c1">// 6. 将 stack pointer +12位（3）上的值写入寄存器ebx中
+</span><span class="c1"></span>   <span class="n">add</span>    <span class="o">%</span><span class="n">eax</span><span class="p">,</span> <span class="o">%</span><span class="n">ebx</span>  <span class="c1">// 7.ebx和eax上的值相加
+</span><span class="c1"></span>   <span class="n">pop</span>    <span class="o">%</span><span class="n">ebx</span>   <span class="c1">// 8.stack pointer + 4位 ,即回收4个位地址
+</span><span class="c1"></span>   <span class="n">ret</span>   <span class="c1">// 9. 回收当前帧
+</span><span class="c1"></span>
+
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="stack">stack</h2>
+<p><a href="https://loonytek.com/2015/04/28/call-stack-internals-part-1/">Call Stack Internals (Part 1)</a></p>
+<ol>
+<li>stack frame: 函数+函数参数+函数的局部变量</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cs" data-lang="cs"><span class="kt">int</span> <span class="n">main</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="n">foo</span><span class="p">();</span>
+  <span class="n">bar</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="k">void</span> <span class="n">foo</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="c1">// do something
+</span><span class="c1"></span>  <span class="n">bar</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="k">void</span> <span class="n">bar</span><span class="p">()</span>
+<span class="p">{</span>
+  <span class="c1">// do something
+</span><span class="c1"></span><span class="p">}</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="https://loonytek.files.wordpress.com/2015/04/stack2.png?w=715&amp;h=275&amp;zoom=2" alt=""></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">atony2099</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-05-01
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/cpu/">cpu</a>
+          <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/channel/">
+            <span class="next-text nav-default">深入了解GPS调度</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="atony2099/atony2099.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:atony2099@gamil.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://github.com/atony2099" class="iconfont icon-github" title="github"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> site pv: <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> site uv: <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">atony2099</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.cddea96674a99fd8cea50d36fb19d9c91f497feea4af5ce4596afd2dbaab9202.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

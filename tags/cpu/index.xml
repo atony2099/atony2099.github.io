@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>cpu on atony2099 develop note</title>
+    <link>http://localhost:1313/tags/cpu/</link>
+    <description>Recent content in cpu on atony2099 develop note</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 01 May 2020 17:01:29 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/cpu/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Cpu</title>
+      <link>http://localhost:1313/post/cpu/</link>
+      <pubDate>Fri, 01 May 2020 17:01:29 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/cpu/</guid>
+      <description>[计算机科学速成课】40集全 Computer - CPU(Central Processing Unit) Architecture of the central processing unit (CPU) Different Classes of CPU Registers cpu control unit: 从内存中获取指令(instructions)，通过控制寄存器单元和运算单</description>
+    </item>
+    
+  </channel>
+</rss>

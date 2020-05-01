@@ -12,13 +12,12 @@
     
     
     <item>
-      <title>Channel</title>
+      <title>深入了解GPS调度</title>
       <link>http://localhost:1313/post/channel/</link>
       <pubDate>Thu, 30 Apr 2020 21:26:51 +0800</pubDate>
       
       <guid>http://localhost:1313/post/channel/</guid>
-      <description>channel channel is aaa 11
-what should it ddsss 11</description>
+      <description>GPS 1. schedule 2. channel 1. 数据结构 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 type hchan struct { qcount uint // total data in the queue dataqsiz uint // size of the circular queue buf unsafe.Pointer // points to an array of dataqsiz elements elemsize uint16 closed uint32 elemtype *_type // element type sendx</description>
     </item>
     
   </channel>
