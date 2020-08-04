@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="atony2099" /><meta name="description" content="GPS 1. schedule 2. channel 1. 数据结构 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 type hchan struct { qcount uint // total data in the queue dataqsiz uint // size of the circular queue buf unsafe.Pointer // points to an array of dataqsiz elements elemsize uint16 closed uint32 elemtype *_type // element type sendx" /><meta name="keywords" content="golang, develop, hugo" />
+<meta name="author" content="atony2099" /><meta name="description" content="GPS 1. schedule 3. 为什么 2. channel 1. 数据结构 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 type hchan struct { qcount uint // total data in the queue dataqsiz uint // size of the circular queue buf unsafe.Pointer // points to an array of dataqsiz elements elemsize uint16 closed uint32 elemtype *_type" /><meta name="keywords" content="golang, develop, hugo" />
 
 
 
@@ -40,22 +40,22 @@
 
 
 <meta property="og:title" content="深入了解GPS调度" />
-<meta property="og:description" content="GPS 1. schedule 2. channel 1. 数据结构 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 type hchan struct { qcount uint // total data in the queue dataqsiz uint // size of the circular queue buf unsafe.Pointer // points to an array of dataqsiz elements elemsize uint16 closed uint32 elemtype *_type // element type sendx" />
+<meta property="og:description" content="GPS 1. schedule 3. 为什么 2. channel 1. 数据结构 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 type hchan struct { qcount uint // total data in the queue dataqsiz uint // size of the circular queue buf unsafe.Pointer // points to an array of dataqsiz elements elemsize uint16 closed uint32 elemtype *_type" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/post/channel/" />
 <meta property="article:published_time" content="2020-04-30T21:26:51+08:00" />
 <meta property="article:modified_time" content="2020-04-30T21:26:51+08:00" />
 <meta itemprop="name" content="深入了解GPS调度">
-<meta itemprop="description" content="GPS 1. schedule 2. channel 1. 数据结构 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 type hchan struct { qcount uint // total data in the queue dataqsiz uint // size of the circular queue buf unsafe.Pointer // points to an array of dataqsiz elements elemsize uint16 closed uint32 elemtype *_type // element type sendx">
+<meta itemprop="description" content="GPS 1. schedule 3. 为什么 2. channel 1. 数据结构 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 type hchan struct { qcount uint // total data in the queue dataqsiz uint // size of the circular queue buf unsafe.Pointer // points to an array of dataqsiz elements elemsize uint16 closed uint32 elemtype *_type">
 <meta itemprop="datePublished" content="2020-04-30T21:26:51&#43;08:00" />
 <meta itemprop="dateModified" content="2020-04-30T21:26:51&#43;08:00" />
-<meta itemprop="wordCount" content="162">
+<meta itemprop="wordCount" content="166">
 
 
 
 <meta itemprop="keywords" content="golang,channel,goroutine," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="深入了解GPS调度"/>
-<meta name="twitter:description" content="GPS 1. schedule 2. channel 1. 数据结构 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 type hchan struct { qcount uint // total data in the queue dataqsiz uint // size of the circular queue buf unsafe.Pointer // points to an array of dataqsiz elements elemsize uint16 closed uint32 elemtype *_type // element type sendx"/>
+<meta name="twitter:description" content="GPS 1. schedule 3. 为什么 2. channel 1. 数据结构 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 type hchan struct { qcount uint // total data in the queue dataqsiz uint // size of the circular queue buf unsafe.Pointer // points to an array of dataqsiz elements elemsize uint16 closed uint32 elemtype *_type"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -123,7 +123,7 @@
       <div class="post-meta">
         <span class="post-time"> 2020-04-30 </span>
         
-          <span class="more-meta"> 162 words </span>
+          <span class="more-meta"> 166 words </span>
           <span class="more-meta"> 1 min read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
@@ -135,7 +135,11 @@
     <nav id="TableOfContents">
   <ul>
     <li><a href="#gps">GPS</a></li>
-    <li><a href="#1-schedule">1. schedule</a></li>
+    <li><a href="#1-schedule">1. schedule</a>
+      <ul>
+        <li><a href="#3-为什么">3. 为什么</a></li>
+      </ul>
+    </li>
     <li><a href="#2-channel">2. channel</a>
       <ul>
         <li><a href="#1-数据结构">1. 数据结构</a></li>
@@ -149,6 +153,7 @@
         <li><a href="#2-send">2. send</a></li>
       </ul>
     </li>
+    <li><a href="#heading"></a></li>
   </ul>
 </nav>
   </div>
@@ -156,6 +161,7 @@
     <div class="post-content">
       <h2 id="gps">GPS</h2>
 <h2 id="1-schedule">1. schedule</h2>
+<h3 id="3-为什么">3. 为什么</h3>
 <h2 id="2-channel">2. channel</h2>
 <h3 id="1-数据结构">1. 数据结构</h3>
 <div class="highlight"><div class="chroma">
@@ -211,6 +217,7 @@
 <h3 id="2-send">2. send</h3>
 <h4 id="1-数据">1. 数据</h4>
 <h4 id="2-goroutine-park">2. goroutine park</h4>
+<h2 id="heading"></h2>
 
     </div>
 
@@ -236,7 +243,11 @@
           <a href="/tags/goroutine/">goroutine</a>
           </div>
       <nav class="post-nav">
-        
+        <a class="prev" href="/post/golang/test/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Test</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
         <a class="next" href="/post/cpu/">
             <span class="next-text nav-default">Cpu</span>
             <span class="next-text nav-mobile">Next</span>
