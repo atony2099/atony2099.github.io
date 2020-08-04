@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>Channel - atony2099 develop note</title>
+  <title>深入了解GPS调度 - atony2099 develop note</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,8 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="atony2099" /><meta name="description" content="channel channel is aaa 11
-what should it ddsss 11" /><meta name="keywords" content="golang, develop, hugo" />
+<meta name="author" content="atony2099" /><meta name="description" content="GPS 1. schedule 3. 为什么 2. channel 1. 数据结构 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 type hchan struct { qcount uint // total data in the queue dataqsiz uint // size of the circular queue buf unsafe.Pointer // points to an array of dataqsiz elements elemsize uint16 closed uint32 elemtype *_type" /><meta name="keywords" content="golang, develop, hugo" />
 
 
 
@@ -40,26 +39,23 @@ what should it ddsss 11" /><meta name="keywords" content="golang, develop, hugo"
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="Channel" />
-<meta property="og:description" content="channel channel is aaa 11
-what should it ddsss 11" />
+<meta property="og:title" content="深入了解GPS调度" />
+<meta property="og:description" content="GPS 1. schedule 3. 为什么 2. channel 1. 数据结构 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 type hchan struct { qcount uint // total data in the queue dataqsiz uint // size of the circular queue buf unsafe.Pointer // points to an array of dataqsiz elements elemsize uint16 closed uint32 elemtype *_type" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/post/channel/" />
 <meta property="article:published_time" content="2020-04-30T21:26:51+08:00" />
 <meta property="article:modified_time" content="2020-04-30T21:26:51+08:00" />
-<meta itemprop="name" content="Channel">
-<meta itemprop="description" content="channel channel is aaa 11
-what should it ddsss 11">
+<meta itemprop="name" content="深入了解GPS调度">
+<meta itemprop="description" content="GPS 1. schedule 3. 为什么 2. channel 1. 数据结构 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 type hchan struct { qcount uint // total data in the queue dataqsiz uint // size of the circular queue buf unsafe.Pointer // points to an array of dataqsiz elements elemsize uint16 closed uint32 elemtype *_type">
 <meta itemprop="datePublished" content="2020-04-30T21:26:51&#43;08:00" />
 <meta itemprop="dateModified" content="2020-04-30T21:26:51&#43;08:00" />
-<meta itemprop="wordCount" content="10">
+<meta itemprop="wordCount" content="166">
 
 
 
-<meta itemprop="keywords" content="golang,channel," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Channel"/>
-<meta name="twitter:description" content="channel channel is aaa 11
-what should it ddsss 11"/>
+<meta itemprop="keywords" content="golang,channel,goroutine," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="深入了解GPS调度"/>
+<meta name="twitter:description" content="GPS 1. schedule 3. 为什么 2. channel 1. 数据结构 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 type hchan struct { qcount uint // total data in the queue dataqsiz uint // size of the circular queue buf unsafe.Pointer // points to an array of dataqsiz elements elemsize uint16 closed uint32 elemtype *_type"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -122,12 +118,12 @@ what should it ddsss 11"/>
           <article class="post">
     
     <header class="post-header">
-      <h1 class="post-title">Channel</h1>
+      <h1 class="post-title">深入了解GPS调度</h1>
 
       <div class="post-meta">
         <span class="post-time"> 2020-04-30 </span>
         
-          <span class="more-meta"> 10 words </span>
+          <span class="more-meta"> 166 words </span>
           <span class="more-meta"> 1 min read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
@@ -138,17 +134,90 @@ what should it ddsss 11"/>
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#channel">channel</a></li>
-    <li><a href="#what-should-it">what should it</a></li>
+    <li><a href="#gps">GPS</a></li>
+    <li><a href="#1-schedule">1. schedule</a>
+      <ul>
+        <li><a href="#3-为什么">3. 为什么</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-channel">2. channel</a>
+      <ul>
+        <li><a href="#1-数据结构">1. 数据结构</a></li>
+        <li><a href="#1如何运作">1.如何运作</a></li>
+        <li><a href="#2">2.</a></li>
+      </ul>
+    </li>
+    <li><a href="#goroutinue">goroutinue</a>
+      <ul>
+        <li><a href="#1-结构">1. 结构</a></li>
+        <li><a href="#2-send">2. send</a></li>
+      </ul>
+    </li>
+    <li><a href="#heading"></a></li>
   </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
-      <h2 id="channel">channel</h2>
-<p>channel is aaa 11</p>
-<h2 id="what-should-it">what should it</h2>
-<p>ddsss 11</p>
+      <h2 id="gps">GPS</h2>
+<h2 id="1-schedule">1. schedule</h2>
+<h3 id="3-为什么">3. 为什么</h3>
+<h2 id="2-channel">2. channel</h2>
+<h3 id="1-数据结构">1. 数据结构</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">hchan</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">qcount</span>   <span class="kt">uint</span>           <span class="c1">// total data in the queue
+</span><span class="c1"></span>	<span class="nx">dataqsiz</span> <span class="kt">uint</span>           <span class="c1">// size of the circular queue
+</span><span class="c1"></span>	<span class="nx">buf</span>      <span class="nx">unsafe</span><span class="p">.</span><span class="nx">Pointer</span> <span class="c1">// points to an array of dataqsiz elements
+</span><span class="c1"></span>	<span class="nx">elemsize</span> <span class="kt">uint16</span>
+	<span class="nx">closed</span>   <span class="kt">uint32</span>
+	<span class="nx">elemtype</span> <span class="o">*</span><span class="nx">_type</span> <span class="c1">// element type
+</span><span class="c1"></span>	<span class="nx">sendx</span>    <span class="kt">uint</span>   <span class="c1">// send index
+</span><span class="c1"></span>	<span class="nx">recvx</span>    <span class="kt">uint</span>   <span class="c1">// receive index
+</span><span class="c1"></span>	<span class="nx">recvq</span>    <span class="nx">waitq</span>  <span class="c1">// list of recv waiters
+</span><span class="c1"></span>	<span class="nx">sendq</span>    <span class="nx">waitq</span>  <span class="c1">// list of send waiters
+</span><span class="c1"></span>
+	<span class="c1">// lock protects all fields in hchan, as well as several
+</span><span class="c1"></span>	<span class="c1">// fields in sudogs blocked on this channel.
+</span><span class="c1"></span>	<span class="c1">//
+</span><span class="c1"></span>	<span class="c1">// Do not change another G&#39;s status while holding this lock
+</span><span class="c1"></span>	<span class="c1">// (in particular, do not ready a G), as this can deadlock
+</span><span class="c1"></span>	<span class="c1">// with stack shrinking.
+</span><span class="c1"></span>	<span class="nx">lock</span> <span class="nx">mutex</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="1如何运作">1.如何运作</h3>
+<h3 id="2">2.</h3>
+<h2 id="goroutinue">goroutinue</h2>
+<h3 id="1-结构">1. 结构</h3>
+<h3 id="2-send">2. send</h3>
+<h4 id="1-数据">1. 数据</h4>
+<h4 id="2-goroutine-park">2. goroutine park</h4>
+<h2 id="heading"></h2>
 
     </div>
 
@@ -171,10 +240,19 @@ what should it ddsss 11"/>
       <div class="post-tags">
           <a href="/tags/golang/">golang</a>
           <a href="/tags/channel/">channel</a>
+          <a href="/tags/goroutine/">goroutine</a>
           </div>
       <nav class="post-nav">
-        
-        
+        <a class="prev" href="/post/golang/test/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Test</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/cpu/">
+            <span class="next-text nav-default">Cpu</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
       </nav>
     </footer>
   </article>
