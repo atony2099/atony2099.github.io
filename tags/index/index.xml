@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>index on atony2099 develop note</title>
+    <link>http://localhost:1313/tags/index/</link>
+    <description>Recent content in index on atony2099 develop note</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 30 Mar 2020 21:26:51 +0800</lastBuildDate>
+    
+	<atom:link href="http://localhost:1313/tags/index/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>数据库索引</title>
+      <link>http://localhost:1313/post/database/mysql/</link>
+      <pubDate>Mon, 30 Mar 2020 21:26:51 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/database/mysql/</guid>
+      <description>1. 从 binary search tree 到 b+ tree 数据库索引为什么使用B+树？ MySQL索引背后的数据结构及算法原理 1分钟了解MyISAM与InnoDB的索引差异 Introduction of B-Tree 我必须</description>
+    </item>
+    
+    <item>
+      <title>数据库索引</title>
+      <link>http://localhost:1313/post/database/trasaction/</link>
+      <pubDate>Mon, 30 Mar 2020 21:26:51 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/database/trasaction/</guid>
+      <description>mysql 的执行过程 查询缓存 解析器:语法解析 查询优化器：生成最佳执行计划 查询存储引擎：根据执行计划，调用存储引擎相关接口，完成实际的查找</description>
+    </item>
+    
+  </channel>
+</rss>
