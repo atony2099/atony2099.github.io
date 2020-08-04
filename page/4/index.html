@@ -112,112 +112,27 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/cpu/">Cpu</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2020-04-01 </span>
-      
-        <span class="more-meta"> 728 words </span>
-        <span class="more-meta"> 2 mins read </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      [计算机科学速成课】40集全 Computer - CPU(Central Processing Unit) Architecture of the central processing unit (CPU) Different Classes of CPU Registers cpu control unit: 从内存中获取指令(instructions)，通过控制寄存器单元和运算单
-    </div>
-    <div class="read-more">
-      <a href="/post/cpu/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/database/mysql/">数据库索引</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2020-03-30 </span>
-      <div class="post-category">
-          <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"> 数据库 </a>
-          </div>
-        <span class="more-meta"> 1424 words </span>
-        <span class="more-meta"> 3 mins read </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      1. 从 binary search tree 到 b+ tree 数据库索引为什么使用B+树？ MySQL索引背后的数据结构及算法原理 1分钟了解MyISAM与InnoDB的索引差异 Introduction of B-Tree 我必须
-    </div>
-    <div class="read-more">
-      <a href="/post/database/mysql/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/database/trasaction/">数据库索引</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2020-03-30 </span>
-      <div class="post-category">
-          <a href="/categories/mysql/"> mysql </a>
-          </div>
-        <span class="more-meta"> 64 words </span>
-        <span class="more-meta"> 1 min read </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      mysql 的执行过程 查询缓存 解析器:语法解析 查询优化器：生成最佳执行计划 查询存储引擎：根据执行计划，调用存储引擎相关接口，完成实际的查找
-    </div>
-    <div class="read-more">
-      <a href="/post/database/trasaction/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/golang/readwrite/"></a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/golang/type/"></a></h1>
     <div class="post-meta">
       <span class="post-time"> 0001-01-01 </span>
       
-        <span class="more-meta"> 61 words </span>
+        <span class="more-meta"> 173 words </span>
         <span class="more-meta"> 1 min read </span>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      log log files Read Write inteface i/o的读写只是两个简单的协议 1 2 3 4 5 6 7 8 9 10 // read to []byte type Reader interface { Read(p []byte) (n int, err error) } // write from []byte type Writer interface { Write(p []byte) (n int, err error) }
+      types in golang category 1. basic type 2.composite type   container
+ arrary slice map    struct
+  pointer
+  channel
+  function
+  interface types
+  3. type declaration 1. type definitions 1 2 3 4 5 6 7 8 9 10  // 1. basic type type A int // 2. struct type Bird struct { } // 3. interface type BirdInterface interface { }   2.
     </div>
     <div class="read-more">
-      <a href="/post/golang/readwrite/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/golang/string/"></a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 0001-01-01 </span>
-      
-        <span class="more-meta"> 139 words </span>
-        <span class="more-meta"> 1 min read </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      string what is  a read-only slice of bytes;   a strings can hold arbitrary byte sequence, even they are not always valid UFT-8 byte sequence for:  const sample = &quot;\xbd\xb2\x3d\xbc\x20\xe2\x8c\x98&quot; will print mess; ��=� ⌘
-  A string literal, absent byte-level escapes, always holds valid UTF-8 sequences.
-     java use uft-16
-    internal implement 1 2 3 4  type StringHeader struct { Data uintptr Len int }   back quote vs double quote   back quote: will not escape characters
-    </div>
-    <div class="read-more">
-      <a href="/post/golang/string/" class="read-more-link">Read more...</a>
+      <a href="/post/golang/type/" class="read-more-link">Read more...</a>
     </div>
   </div>
 </article>
@@ -225,14 +140,11 @@
     </section>
   
   <nav class="pagination">
-    <a class="prev" href="/page/2/">
+    <a class="prev" href="/page/3/">
         <i class="iconfont icon-left"></i>
         <span class="prev-text">Prev</span>
       </a>
-    <a class="next" href="/page/4/">
-        <span class="next-text">Next</span>
-        <i class="iconfont icon-right"></i>
-      </a>
+    
   </nav>
         </div>
         
