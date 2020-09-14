@@ -157,7 +157,7 @@ feature if a methods is called, the receiver will be copy every time;</descripti
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/post/base/base/02/</guid>
-      <description>regular expression 1. what is 2. syntax base single char quantifiers(数量) position(位置) \d 匹配数字 * 0个或者更多 ^一行的开头 \w 匹配word(数字、字母) +</description>
+      <description>regular expression refernce 1. what is 2. syntax base single char quantifiers(数量) position(位置) \d 匹配数字 * 0个或者更多 ^一行的开头 \w 匹配word(数字、字母)</description>
     </item>
     
     <item>
@@ -258,7 +258,7 @@ Built-in operators    Operation Result Description     0011 &amp;amp; 0101 0001 
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/post/golang/regex/</guid>
-      <description>regex base single char quantifiers(数量) position(位置) \d 匹配数字 * 0个或者更多 ^一行的开头 \w 匹配word(数字、字母) + 1个或更多，</description>
+      <description></description>
     </item>
     
     <item>
