@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title> - atony2099 develop note</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="atony2099" /><meta name="description" content="mysql reference MySQL Architecture and Components MySQL相关（番外篇）- innodb 逻辑存储结构 图说：InnoDB之表空间 BTree和B&#43;Tree详解 What does eq_ref and ref types mean in MySQL explain EXPLAIN Output Format MySQL · 答疑" /><meta name="keywords" content="golang, develop, hugo" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.69.0 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/db/mysql/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="" />
+<meta property="og:description" content="mysql reference MySQL Architecture and Components MySQL相关（番外篇）- innodb 逻辑存储结构 图说：InnoDB之表空间 BTree和B&#43;Tree详解 What does eq_ref and ref types mean in MySQL explain EXPLAIN Output Format MySQL · 答疑" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/db/mysql/" />
+
+<meta itemprop="name" content="">
+<meta itemprop="description" content="mysql reference MySQL Architecture and Components MySQL相关（番外篇）- innodb 逻辑存储结构 图说：InnoDB之表空间 BTree和B&#43;Tree详解 What does eq_ref and ref types mean in MySQL explain EXPLAIN Output Format MySQL · 答疑">
+
+<meta itemprop="wordCount" content="2732">
+
+
+
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="mysql reference MySQL Architecture and Components MySQL相关（番外篇）- innodb 逻辑存储结构 图说：InnoDB之表空间 BTree和B&#43;Tree详解 What does eq_ref and ref types mean in MySQL explain EXPLAIN Output Format MySQL · 答疑"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">atony2099 develop note</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About me</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">atony2099 develop note</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About me</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title"></h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 0001-01-01 </span>
+        
+          <span class="more-meta"> 2732 words </span>
+          <span class="more-meta"> 6 mins read </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#reference">reference</a></li>
+    <li><a href="#mysql-执行过程">mysql 执行过程</a></li>
+    <li><a href="#存储引擎比较">存储引擎比较</a></li>
+    <li><a href="#innodb-结构">innodb 结构</a>
+      <ul>
+        <li><a href="#磁盘结构">磁盘结构</a></li>
+      </ul>
+    </li>
+    <li><a href="#sql-语句">sql 语句</a>
+      <ul>
+        <li><a href="#1-sql-语句分类">1. sql 语句分类</a></li>
+        <li><a href="#2--index">2.  index</a></li>
+      </ul>
+    </li>
+    <li><a href="#索引">索引</a>
+      <ul>
+        <li><a href="#1-什么是索引">1. 什么是索引</a></li>
+        <li><a href="#2-为什么不使用hash">2. 为什么不使用hash</a></li>
+        <li><a href="#3为什么使用btree-btree">3.为什么使用Btree； B+Tree</a></li>
+        <li><a href="#4-索引的类型">4. 索引的类型</a></li>
+        <li><a href="#5-聚集索引clustered-index-vs-辅助索引secondary-index">5. 聚集索引(clustered index) vs 辅助索引(secondary index)</a></li>
+        <li><a href="#6为什么主键需要自增">6.为什么主键需要自增</a></li>
+        <li><a href="#7-覆盖索引-covering-index">7. 覆盖索引 covering index</a></li>
+        <li><a href="#8-索引的命中">8. 索引的命中</a></li>
+        <li><a href="#9建立索引最佳实践">9.建立索引最佳实践</a></li>
+        <li><a href="#10-慢日志">10. 慢日志</a></li>
+        <li><a href="#4-explain">4. explain</a></li>
+      </ul>
+    </li>
+    <li><a href="#lock">LOCK</a>
+      <ul>
+        <li><a href="#1-是什么-1">1. 是什么？</a></li>
+        <li><a href="#2lock的种类">2.lock的种类</a></li>
+        <li><a href="#2ddd">2.ddd</a></li>
+      </ul>
+    </li>
+    <li><a href="#事务transactions">事务(transactions)</a>
+      <ul>
+        <li><a href="#1-是什么-2">1. 是什么？</a></li>
+        <li><a href="#2-acid">2. acid</a></li>
+        <li><a href="#3-redo-log-and-undo-log">3. Redo log and undo log;</a></li>
+        <li><a href="#3隔离级别isolation-level">3.隔离级别(isolation level)</a></li>
+      </ul>
+    </li>
+    <li><a href="#数据库设计">数据库设计</a>
+      <ul>
+        <li><a href="#1基础概念">1.基础概念</a></li>
+        <li><a href="#1-范式">1. 范式</a></li>
+      </ul>
+    </li>
+    <li><a href="#intergrity-constraint">intergrity CONSTRAINT</a>
+      <ul>
+        <li><a href="#1-是什么-5">1. 是什么？</a></li>
+        <li><a href="#2-类型">2. 类型</a></li>
+      </ul>
+    </li>
+    <li><a href="#分布式">分布式</a></li>
+    <li><a href="#高并发下的mysql">高并发下的mysql</a>
+      <ul>
+        <li><a href="#拆分类型-垂直拆分-水平拆分">拆分类型： 垂直拆分 水平拆分</a></li>
+        <li><a href="#主从同步">主从同步</a></li>
+        <li><a href="#读写分离">读写分离</a></li>
+      </ul>
+    </li>
+    <li><a href="#线上数据恢复">线上数据恢复</a>
+      <ul>
+        <li><a href="#1-backup">1. backup</a></li>
+        <li><a href="#binary-log">binary log</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h1 id="mysql">mysql</h1>
+<h2 id="reference">reference</h2>
+<p><a href="https://lalitvc.wordpress.com/2016/11/03/mysql-architecture-and-components/">MySQL Architecture and Components</a>
+<a href="https://juejin.im/post/6844904056767381517">MySQL相关（番外篇）- innodb 逻辑存储结构</a>
+<a href="https://www.orczhou.com/index.php/2009/08/image-innodb-tablespace/">图说：InnoDB之表空间</a></p>
+<p><a href="https://www.cnblogs.com/vianzhang/p/7922426.html">BTree和B+Tree详解</a></p>
+<p><a href="https://stackoverflow.com/questions/4508055/what-does-eq-ref-and-ref-types-mean-in-mysql-explain">What does eq_ref and ref types mean in MySQL explain</a></p>
+<p><a href="https://dev.mysql.com/doc/refman/8.0/en/explain-output.html#jointype_ref">EXPLAIN Output Format</a></p>
+<p><a href="http://mysql.taobao.org/monthly/2015/03/04/">MySQL · 答疑释惑· using filesort VS using temporary</a></p>
+<p><a href="https://tech.meituan.com/2014/06/30/mysql-index.html">MySQL索引原理及慢查询优化</a></p>
+<p><a href="https://www.guru99.com/dbms-keys.html">DBMS Keys: Primary, Candidate, Super, Alternate and Foreign (Example)</a></p>
+<p>[http://rdbms.opengrass.net/2_Database%20Design/2.1_TermsOfReference/2.1.2_Keys.html](<a href="http://rdbms.opengrass.net/2_Database">http://rdbms.opengrass.net/2_Database</a> Design/2.1_TermsOfReference/2.1.2_Keys.html)</p>
+<p><a href="https://techdifferences.com/difference-between-super-key-and-candidate-key.html">Difference Between Super Key and Candidate Key</a></p>
+<p><a href="https://www.studytonight.com/dbms/boyce-codd-normal-form.php">Boyce-Codd Normal Form (BCNF)</a></p>
+<p><a href="https://www.zhihu.com/question/24696366">如何解释关系数据库的第一第二第三范式？</a></p>
+<p><a href="https://binaryterms.com/integrity-constraints-in-dbms.html#ReferentialIntegrityConstraint">Integrity Constraints in DBMS</a></p>
+<p><a href="https://www.javatpoint.com/dbms-integrity-constraints#:~:text=Integrity%20constraints%20are%20a%20set%20of%20rules.&amp;text=Integrity%20constraints%20ensure%20that%20the,accidental%20damage%20to%20the%20database.">Integrity constraints</a></p>
+<p><a href="https://juejin.im/post/6868197543155597320?utm_source=gold_browser_extension#heading-6">我朋友不小心删了线上的数据库</a></p>
+<h2 id="mysql-执行过程">mysql 执行过程</h2>
+<p><img src="https://user-gold-cdn.xitu.io/2020/1/20/16fc1e5adb781877?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt=""></p>
+<ol>
+<li>
+<p>连接器:</p>
+<ol>
+<li>建立连接</li>
+<li>权限验证
+可能的报错信息:</li>
+</ol>
+<blockquote>
+<p>Access denied for user &lsquo;root&rsquo;@&lsquo;localhost&rsquo; (using password: YES)</p>
+</blockquote>
+</li>
+<li>
+<p>分析器:</p>
+<ol>
+<li>词法分析，语法分析，生成解析树
+可能的报错信息:</li>
+</ol>
+<blockquote>
+<p>ERROR:You have an error in your SQL syntax.</p>
+</blockquote>
+</li>
+<li>
+<p>查询优化器:</p>
+<ol>
+<li>生成执行计划</li>
+</ol>
+</li>
+<li>
+<p>执行器:</p>
+<ol>
+<li>调用存储引擎处理</li>
+</ol>
+</li>
+</ol>
+<h2 id="存储引擎比较">存储引擎比较</h2>
+<p><img src="https://www.linuxidc.com/upload/2019_10/191005161494052.png" alt=""></p>
+<p>innodb: 支持事务； 支持行锁</p>
+<h2 id="innodb-结构">innodb 结构</h2>
+<p><img src="https://img2018.cnblogs.com/blog/780228/201908/780228-20190813150018077-1242631904.png" alt=""></p>
+<h3 id="磁盘结构">磁盘结构</h3>
+<p><img src="https://cdn.jsdelivr.net/gh/atony2099/@master/20200828/M9MCi6.jpg" alt="M9MCi6"></p>
+<p><img src="https://lalitvc.files.wordpress.com/2016/11/innodb_tablespace.png" alt=""></p>
+<ol>
+<li>tablespace:
+最顶层结构；</li>
+<li>page
+基本存储单元</li>
+<li>segment; extent
+为了更好管理page，又换分了这两层
+segment: 分为leaf node segment；non-leaf node segment(存储数据)</li>
+</ol>
+<h2 id="sql-语句">sql 语句</h2>
+<h3 id="1-sql-语句分类">1. sql 语句分类</h3>
+<p><img src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/20190826175059/Types-of-SQL-Commands.jpg" alt=""></p>
+<p>​            awwwwwwwwsafsdd</p>
+<h3 id="2--index">2.  index</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql">
+<span class="k">SHOW</span> <span class="k">INDEX</span> <span class="k">FROM</span> <span class="n">order_info</span><span class="p">;</span>
+
+<span class="k">DROP</span> <span class="k">INDEX</span> <span class="o">`</span><span class="n">user_product_detail_index</span><span class="o">`</span> <span class="k">ON</span> <span class="n">order_info</span><span class="p">;</span>
+<span class="k">CREATE</span> <span class="k">INDEX</span> <span class="n">idx</span> <span class="k">ON</span> <span class="n">order_info</span> <span class="p">(</span><span class="n">product_name</span><span class="p">,</span><span class="n">productor</span><span class="p">);</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="索引">索引</h2>
+<h3 id="1-什么是索引">1. 什么是索引</h3>
+<p>高效的数据结构;提高查询速度；</p>
+<h3 id="2-为什么不使用hash">2. 为什么不使用hash</h3>
+<p>hash适合单个查询，不适合范围查询</p>
+<h3 id="3为什么使用btree-btree">3.为什么使用Btree； B+Tree</h3>
+<ol>
+<li>B/B+ Tree是一种面向磁盘读写的平衡查找树</li>
+<li>相比其他平衡查找树；节点可以存储更多数据，从而可以显著减少树的高度，也即是减少I/O次数</li>
+</ol>
+<p><img src="http://img.blog.csdn.net/20160202205105560" alt="">
+<img src="https://www.baeldung.com/wp-content/uploads/sites/4/2020/05/bplustreefull-2.png" alt=""></p>
+<p>b+tree:</p>
+<ol>
+<li>
+<p>叶子节点形成双向链表:</p>
+<blockquote>
+<p>提高范围查询的效率</p>
+</blockquote>
+</li>
+<li>
+<p>只有叶子节点才存储 data；其他节点只存储key:</p>
+<p>增加单个node key的数量,减少树的高度</p>
+</li>
+</ol>
+<h3 id="4-索引的类型">4. 索引的类型</h3>
+<ol>
+<li>
+<p>从包含字段数看</p>
+</li>
+<li>
+<p>单个索引:</p>
+<ol start="2">
+<li>联合索引</li>
+</ol>
+</li>
+<li>
+<p>从叶节点存储数据看</p>
+<ol>
+<li>
+<p>聚集索引(clustered index):</p>
+<p>叶节点存储完整的数据</p>
+</li>
+<li>
+<p>次级索引(secondary index)</p>
+<p>叶节点只存储主键值</p>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="5-聚集索引clustered-index-vs-辅助索引secondary-index">5. 聚集索引(clustered index) vs 辅助索引(secondary index)</h3>
+<p>聚集索引:</p>
+<ol>
+<li>Leaf node 包含完整数据；一张表里</li>
+<li>选择哪个索引作为聚集索引
+<ol>
+<li>主键</li>
+<li>第一个 unique index(该unique 所在column为not null)</li>
+<li>生成一个隐藏的主键</li>
+</ol>
+</li>
+</ol>
+<p>次级索引:</p>
+<pre><code>1. leaf node 只有主键值
+</code></pre>
+<h3 id="6为什么主键需要自增">6.为什么主键需要自增</h3>
+<p>如果不是自增，而是无序的，就会导致新加的key插入到b+tree node的中间某个位置，导致节点频繁的分裂(split)</p>
+<h3 id="7-覆盖索引-covering-index">7. 覆盖索引 covering index</h3>
+<h4 id="1-what">1. what?</h4>
+<p>命中辅助索引且要查询的字段属于辅助索引字段的子集，则不需要回到聚集索引上面去查，</p>
+<p>这时候辅助索引就被叫做covering index;这个查询过程叫做coverd query(覆盖查询)</p>
+<h3 id="8-索引的命中">8. 索引的命中</h3>
+<h4 id="1-什么时候会用到索引">1. 什么时候会用到索引</h4>
+<ol>
+<li>where</li>
+<li>order by</li>
+<li>group by (本质是在order by基础上再做一层计算)</li>
+</ol>
+<h4 id="2-什么时候索引无法命中">2. 什么时候索引无法命中</h4>
+<ol>
+<li><code>%like</code></li>
+<li>查询的字段做计算</li>
+<li>未遵循最左前缀匹配原则</li>
+</ol>
+<h4 id="3最左前缀匹配left-most-prefix">3.最左前缀匹配(left most prefix)</h4>
+<h4 id="1-是什么">1. 是什么</h4>
+<ol>
+<li>Where子语句会一直匹配索引直到遇到范围查询(&gt;,&lt;,like,between，in除外);范围索引之后的查询只能全量扫描；</li>
+<li>如果</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">key</span> <span class="n">idx</span> <span class="p">(</span><span class="n">c1</span><span class="p">,</span><span class="n">c2</span><span class="p">,</span><span class="n">c3</span><span class="p">)</span>
+
+<span class="k">where</span> <span class="n">c1</span><span class="o">=</span><span class="mi">1</span> <span class="k">and</span> <span class="n">c2</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="o">//</span><span class="n">ok</span><span class="p">;</span>
+<span class="k">where</span> <span class="n">c1</span><span class="o">=</span><span class="mi">1</span> <span class="k">and</span> <span class="n">c3</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="o">//</span><span class="err">部分匹配</span><span class="p">;</span>
+<span class="k">where</span> <span class="n">c3</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="o">//</span><span class="k">not</span> <span class="n">ok</span><span class="p">;</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="9建立索引最佳实践">9.建立索引最佳实践</h3>
+<ol>
+<li>区分度不大不要建立索引:
+<ol>
+<li>该索引查询效率跟全表扫描差不多，考虑到回表查询，效率更低</li>
+<li>额外维护一个索引树，整体效率降低；</li>
+</ol>
+</li>
+<li>使用联合索引而不是多个单个索引;
+<ol>
+<li>查询频率高的放前面</li>
+</ol>
+</li>
+<li>避免索引无法命中的情况
+<ol>
+<li>遵循最左匹配原则</li>
+</ol>
+</li>
+</ol>
+<h3 id="10-慢日志">10. 慢日志</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="n">slow_query_log</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">log</span><span class="o">-</span><span class="n">slow</span><span class="o">-</span><span class="n">queries</span> <span class="o">=</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">log</span><span class="o">/</span><span class="n">mysql</span><span class="o">-</span><span class="n">slow</span><span class="p">.</span><span class="n">log</span>
+<span class="n">long_query_time</span> <span class="o">=</span> <span class="mi">2</span>
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"> mysqldumpslow [options] [log_file ...]
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="4-explain">4. explain</h3>
+<h4 id="1-type">1. type:</h4>
+<p>const、eq_reg、ref、index_merge, range、index,ALL</p>
+<p>Ref: 最常见类型，命中索引;查询语句一般是等值查询 <code>=</code> or <code>&lt;=&gt;</code></p>
+<p>Index_merge: 同时查询多个索引，并合并</p>
+<p>Range: 命中索引， 且查询是范围查询</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">&lt;&gt;, &gt;, &gt;=, &lt;, &lt;=, BETWEEN, LIKE, IN()
+</code></pre></td></tr></table>
+</div>
+</div><p>Index: 扫描整个索引树:</p>
+<p>All:扫描整个聚集索引(整个表)</p>
+<h4 id="2rows">2.rows</h4>
+<p>大概多少行被扫描；</p>
+<h4 id="3extra">3.extra</h4>
+<ol>
+<li>
+<p>using index: 覆盖索引</p>
+</li>
+<li>
+<p>Using filesort: 不能使用索引排序的时候,它跟文件无关，是一种快速排序方式 (Anytime a sort can’t be performed from an index, it’s a filesort. It has nothing to do with files. F)</p>
+</li>
+<li>
+<p>Using temporary: 使用临时表保存临时结果; 常见于order by;  group by</p>
+</li>
+</ol>
+<h2 id="lock">LOCK</h2>
+<h3 id="1-是什么-1">1. 是什么？</h3>
+<p>本质上是一个标志位置；</p>
+<h3 id="2lock的种类">2.lock的种类</h3>
+<h4 id="1-范围上">1. 范围上</h4>
+<ol>
+<li>行锁</li>
+<li>间隙锁</li>
+</ol>
+<h3 id="2ddd">2.ddd</h3>
+<h2 id="事务transactions">事务(transactions)</h2>
+<h3 id="1-是什么-2">1. 是什么？</h3>
+<p>一组操作，要么全部成功，要不全部失败</p>
+<h3 id="2-acid">2. acid</h3>
+<ol>
+<li>
+<p>Atomical:原子</p>
+<p>事务里多个操作被看成一个不可分割执行单元，要么全部成功，要么全部失败</p>
+</li>
+<li>
+<p>consitency: 一致性</p>
+<p>事务开始前和结束后，数据库完整性约束没有被破坏；（如果经过一个修改工号的事务后，工号变的非唯一了，则表明一致性遭到了破坏。）；</p>
+</li>
+<li>
+<p>isolation: 隔离性</p>
+<p>多个事务操作并发时互相隔离，互不影响；</p>
+</li>
+<li>
+<p>Duration:持久性</p>
+<p>事务一旦提交(commit);即使发生异常，也能恢复到提交的状态。</p>
+</li>
+</ol>
+<h3 id="3-redo-log-and-undo-log">3. Redo log and undo log;</h3>
+<h4 id="1-是什么-3">1. 是什么？</h4>
+<h4 id="2">2.</h4>
+<h3 id="3隔离级别isolation-level">3.隔离级别(isolation level)</h3>
+<p>隔离是一种并发控制手段； 比锁更复杂</p>
+<h4 id="1read-uncommited--无隔离">1.read uncommited  无隔离</h4>
+<p><code>SET @@session.transaction_isolation = 'READ-UNCOMMITTED';</code></p>
+<p>事务之间完全无隔离；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SET</span> <span class="o">@@</span><span class="k">session</span><span class="p">.</span><span class="n">transaction_isolation</span> <span class="o">=</span> <span class="s1">&#39;READ-UNCOMMITTED&#39;</span><span class="p">;</span>
+<span class="k">create</span> <span class="k">database</span> <span class="n">test</span><span class="p">;</span>
+<span class="n">use</span> <span class="n">test</span><span class="p">;</span>
+<span class="k">create</span> <span class="k">table</span> <span class="n">test</span><span class="p">(</span><span class="n">id</span> <span class="nb">int</span> <span class="k">primary</span> <span class="k">key</span><span class="p">);</span>
+<span class="k">insert</span> <span class="k">into</span> <span class="n">test</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="k">values</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+
+
+<span class="c1">-- transaction 1
+</span><span class="c1"></span><span class="k">begin</span><span class="p">;</span>
+<span class="k">update</span> <span class="n">test</span> <span class="k">set</span> <span class="n">id</span> <span class="o">=</span> <span class="mi">2</span> <span class="k">where</span> <span class="n">id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">test</span><span class="p">;</span> <span class="c1">-- 此时看到一条ID为2的记录
+</span><span class="c1"></span>
+
+<span class="c1">-- transaction 2;
+</span><span class="c1"></span><span class="n">use</span> <span class="n">test</span><span class="p">;</span>
+<span class="k">begin</span><span class="p">;</span>
+<span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">test</span><span class="p">;</span> <span class="c1">-- 此时看到一条 ID 为 2 的记录
+</span></code></pre></td></tr></table>
+</div>
+</div><h4 id="2-read-commited">2. read commited</h4>
+<p><code>SET @@session.transaction_isolation = 'READ-COMMITTED';</code></p>
+<p>读已经提交；</p>
+<h4 id="3-repeatable-read">3. repeatable read</h4>
+<ol>
+<li>
+<p>可重复读</p>
+</li>
+<li>
+<p>不可重复读</p>
+</li>
+<li>
+<p>串行</p>
+</li>
+</ol>
+<h2 id="数据库设计">数据库设计</h2>
+<h3 id="1基础概念">1.基础概念</h3>
+<h4 id="1super-key">1.super key</h4>
+<p><img src="https://techdifferences.com/wp-content/uploads/2016/12/super-keys.jpg" alt=""></p>
+<p>a set of field which help get rest the rest value of a row record</p>
+<p>abcdef</p>
+<p>if (a,b) ==&gt; abcdef; (a,b) is the super key;</p>
+<h4 id="2candidate-key--primary-key">2.candidate key &amp;&amp; primary key</h4>
+<p>if a super key&rsquo;s proper sets have no super key;（mininal super key ）</p>
+<p><img src="https://techdifferences.com/wp-content/uploads/2016/12/Candidate-keys.jpg" alt=""></p>
+<h4 id="3primary-key">3.primary key</h4>
+<p>a choice of candinate keys, other candidate keys is called alternate key;</p>
+<h4 id="4non-prime-attribute">4.non-prime attribute</h4>
+<p>an attribute that does not occur in ANY candidate key is called a <strong>non-prime attribute</strong>.</p>
+<h3 id="1-范式">1. 范式</h3>
+<h4 id="1-是什么-4">1. 是什么</h4>
+<p>是一系列标准，规定如何设计数据库，以此减少冗余，从而避免增删改查的异常</p>
+<blockquote>
+<p>冗余: 一张表只有一个主题，所有字段都跟该主题有关，否则都是冗余</p>
+</blockquote>
+<h4 id="2-具体范式">2. 具体范式</h4>
+<ol>
+<li>
+<p>原子性</p>
+<p>字段值是原子性(不可分割)</p>
+</li>
+<li>
+<p>非主属性字段段完全依赖候选键；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql">   
+<span class="n">score</span> <span class="k">table</span> 
+   
+<span class="n">studentID</span><span class="p">,</span> <span class="n">subjectID</span><span class="p">,</span> <span class="n">score</span><span class="p">,</span> <span class="n">teacher</span><span class="p">;</span>
+   
+<span class="c1">------------- problem ---------
+</span><span class="c1"></span>   
+<span class="n">candidate</span> <span class="k">key</span><span class="p">:</span> <span class="n">studentID</span><span class="p">,</span> <span class="n">subjectID</span><span class="p">;</span>
+   
+<span class="n">teacher</span> <span class="err">依赖于</span> <span class="n">subjectID</span><span class="p">,</span><span class="err">存在部分依赖</span>
+   
+<span class="c1">------- solve
+</span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>非主属性字段只依赖候选键，不存在传递依赖</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="n">student</span> <span class="k">table</span>
+   
+<span class="n">studentID</span><span class="p">,</span> <span class="k">class</span><span class="p">,</span> <span class="k">class</span> <span class="n">teacher</span><span class="p">;</span>
+   
+<span class="c1">------ problem------
+</span><span class="c1"></span>   
+<span class="n">candiate</span> <span class="k">key</span><span class="p">:</span> <span class="n">studentID</span><span class="p">;</span>
+   
+<span class="k">class</span> <span class="n">teacher</span> <span class="err">依赖于</span> <span class="k">class</span><span class="err">，传递依赖</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>对于表中任何依赖 A → B, A始终是候选键；</p>
+</li>
+</ol>
+<h2 id="intergrity-constraint">intergrity CONSTRAINT</h2>
+<h3 id="1-是什么-5">1. 是什么？</h3>
+<p>规定字段需要遵守的规则；通过这些规则确保数据的准确性和可靠性</p>
+<blockquote>
+<p>primary, unique, not null,default, check;</p>
+</blockquote>
+<h3 id="2-类型">2. 类型</h3>
+<ol>
+<li>
+<p>entity integrity:</p>
+<p>主键不为null</p>
+</li>
+<li>
+<p>domain integrity:</p>
+<ol>
+<li>Column types</li>
+<li>not null constraint</li>
+<li>default constraint</li>
+<li>check clause constraint</li>
+</ol>
+</li>
+<li>
+<p>Referential Integrity:引用完整性</p>
+<p>外键的值必须与引用的表的主键相匹配。</p>
+</li>
+<li></li>
+</ol>
+<h2 id="分布式">分布式</h2>
+<h2 id="高并发下的mysql">高并发下的mysql</h2>
+<h3 id="拆分类型-垂直拆分-水平拆分">拆分类型： 垂直拆分 水平拆分</h3>
+<ol>
+<li>垂直：根据一定规则将记录划分到不同库/表里；</li>
+<li>水平:将记录的字段再进一步拆分</li>
+</ol>
+<h3 id="主从同步">主从同步</h3>
+<h4 id="1binary-log">1.binary log</h4>
+<h4 id="2-主从同步原理">2. 主从同步原理</h4>
+<p><img src="http://misc.linkedkeeper.com/misc/img/blog/201709/linkedkeeper0_b3fa3bae-e0f3-4a9b-b16f-4e4da63362b9.jpg" alt="">t</p>
+<ol>
+<li>
+<p>write binary log :</p>
+</li>
+<li>
+<p>notify slave；slave get binary log;</p>
+<blockquote>
+<p>半同步：</p>
+<p>Master库的操作等待slave库 ack；c</p>
+</blockquote>
+</li>
+<li>
+<p>replay the binary log;</p>
+</li>
+</ol>
+<h3 id="读写分离">读写分离</h3>
+<h4 id="1-是什么-6">1. 是什么?</h4>
+<p>读和写放在不同主机上</p>
+<h4 id="2为什么">2,为什么</h4>
+<h4 id="2-如何做">2. 如何做</h4>
+<p>配置主从服务</p>
+<ol>
+<li>通过代理</li>
+<li>自己手动选择:</li>
+</ol>
+<h4 id="3-面临问题以及如何解决">3. 面临问题以及如何解决</h4>
+<ol>
+<li>
+<p>数据不一致</p>
+<blockquote>
+</blockquote>
+</li>
+</ol>
+<h2 id="线上数据恢复">线上数据恢复</h2>
+<h3 id="1-backup">1. backup</h3>
+<blockquote>
+<p>mysqldump -uroot -p&quot;密码&rdquo; 数据库名 &gt; /mysql/person_<code>date +%Y%m%d</code>.sql</p>
+</blockquote>
+<h3 id="binary-log">binary log</h3>
+<h4 id="1-作用">1. 作用</h4>
+<p>config;</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">
+SHOW BINARY LOGS<span class="p">;</span>//
+
+SHOW MASTER STATUS<span class="p">;</span>// 当前执行的位置
+
+show binlog events IN  <span class="s1">&#39;binlog.000070&#39;</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>recover:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># 通过起始点和结束点恢复    
+mysqlbinlog --start-position=&#34;582&#34; --stop-position=&#34;9414&#34; mysql-bin.000002 | mysql -uroot -proot;
+
+
+# 通过起始时间和结束时间来恢复，传入的时间可以是一个yyyy-MM-dd HH:mm:ss 的时间格式，也可以是一个时间戳
+mysqlbinlog --start-datetime=&#34;2020-9-1 8:25:04&#34; --stop-datetime=&#34;2020-9-1 20:00:00&#34; mysql-bin.000002 | mysql -uroot -proot
+
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="2-format">2. format;</h4>
+<ol>
+<li>
+<p><strong>Statement-based replication</strong>:</p>
+<p>记录原始的sql语句</p>
+</li>
+<li>
+<p><strong>Row-based replication</strong></p>
+<p>记录行的变化；</p>
+</li>
+</ol>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">atony2099</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        0001-01-01
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/base/base/02/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default"></span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/db/redis/">
+            <span class="next-text nav-default"></span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="atony2099/atony2099.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:atony2099@gamil.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://github.com/atony2099" class="iconfont icon-github" title="github"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> site pv: <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> site uv: <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">atony2099</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.cddea96674a99fd8cea50d36fb19d9c91f497feea4af5ce4596afd2dbaab9202.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

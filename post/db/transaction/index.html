@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title> - atony2099 develop note</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="atony2099" /><meta name="description" content="mysql 事务 reference mysql日志系统之redo log和bin log MySQL事务日志 Redo log(重做) 和 Undo log（撤销） MySQL之 bin log、redo log" /><meta name="keywords" content="golang, develop, hugo" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.69.0 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/db/transaction/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="" />
+<meta property="og:description" content="mysql 事务 reference mysql日志系统之redo log和bin log MySQL事务日志 Redo log(重做) 和 Undo log（撤销） MySQL之 bin log、redo log" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/db/transaction/" />
+
+<meta itemprop="name" content="">
+<meta itemprop="description" content="mysql 事务 reference mysql日志系统之redo log和bin log MySQL事务日志 Redo log(重做) 和 Undo log（撤销） MySQL之 bin log、redo log">
+
+<meta itemprop="wordCount" content="669">
+
+
+
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="mysql 事务 reference mysql日志系统之redo log和bin log MySQL事务日志 Redo log(重做) 和 Undo log（撤销） MySQL之 bin log、redo log"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">atony2099 develop note</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About me</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">atony2099 develop note</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About me</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title"></h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 0001-01-01 </span>
+        
+          <span class="more-meta"> 669 words </span>
+          <span class="more-meta"> 2 mins read </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#reference">reference</a></li>
+    <li><a href="#1-是什么">1. 是什么？</a></li>
+    <li><a href="#2-acid">2. acid</a></li>
+    <li><a href="#3-redo-log">3. Redo log;</a>
+      <ul>
+        <li><a href="#1-是什么-1">1. 是什么？</a></li>
+        <li><a href="#2-redo-log--执行过程">2. Redo log  执行过程</a></li>
+        <li><a href="#3-与binary-log-对比">3. 与binary log 对比</a></li>
+        <li><a href="#3-undo-log">3. undo log</a></li>
+      </ul>
+    </li>
+    <li><a href="#3隔离级别isolation-level">3.隔离级别(isolation level)</a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>mysql 事务</p>
+<h2 id="reference">reference</h2>
+<p><a href="https://www.jianshu.com/p/4bcfffb27ed5">mysql日志系统之redo log和bin log</a></p>
+<p><a href="https://blog.csdn.net/universsky2015/article/details/102597839">MySQL事务日志 Redo log(重做) 和 Undo log（撤销）</a></p>
+<p><a href="https://www.cnblogs.com/reecelin/p/13504084.html">MySQL之 bin log、redo log和undo log 简介</a></p>
+<h2 id="1-是什么">1. 是什么？</h2>
+<p>一个不可分割的工作单元，可能包含多个操作，，要么全部成功，要不全部失败</p>
+<h2 id="2-acid">2. acid</h2>
+<ol>
+<li>
+<p>Atomical:原子</p>
+<p>事务里多个操作被看成一个不可分割执行单元，要么全部成功，要么全部失败</p>
+</li>
+<li>
+<p>consitency: 一致性</p>
+<p>事务开始前和结束后，数据库完整性约束没有被破坏；（如果经过一个修改工号的事务后，工号变的非唯一了，则表明一致性遭到了破坏。）；</p>
+</li>
+<li>
+<p>isolation: 隔离性</p>
+<p>多个事务操作并发时互相隔离，互不影响；</p>
+</li>
+<li>
+<p>Duration:持久性</p>
+<p>事务一旦提交(commit);即使发生异常，也能恢复到提交的状态。</p>
+</li>
+</ol>
+<h2 id="3-redo-log">3. Redo log;</h2>
+<h3 id="1-是什么-1">1. 是什么？</h3>
+<p>事务操作过程中产生的日志，用于恢复和回滚</p>
+<ol>
+<li>都是 innodb 引擎实现的</li>
+<li></li>
+</ol>
+<p><img src="https://images2018.cnblogs.com/blog/733013/201805/733013-20180508101949424-938931340.png" alt=""></p>
+<h3 id="2-redo-log--执行过程">2. Redo log  执行过程</h3>
+<p><img src="https://ss.csdn.net/p?https://mmbiz.qpic.cn/mmbiz_png/srFgGN3kxbGusNgVWwQX5UoVTZNdfecmicQKzIbk1Y7BzR3nibJaFhKEZRCgWtl3ET9Toma5ksWPnukriajkCyiaIw/640?wx_fmt=png" alt=""></p>
+<ul>
+<li>若数据已在内存中则直接进行修改，否则先将数据从磁盘加载到内存中；</li>
+<li>修改完成之后，生成一条<code>redolog</code>，将这条<code>redolog</code>写入<code>redo log buffer</code>中，记录的是修改之后的值；</li>
+<li>根据选定的策略，将<code>redo log file</code>中的内容刷回到<code>redo log file</code>中；</li>
+<li>定期将内存中修改后的数据刷新到磁盘</li>
+</ul>
+<h3 id="3-与binary-log-对比">3. 与binary log 对比</h3>
+<h3 id="3-undo-log">3. undo log</h3>
+<h2 id="3隔离级别isolation-level">3.隔离级别(isolation level)</h2>
+<p>隔离是一种并发控制手段； 比锁更复杂</p>
+<h4 id="1read-uncommited--无隔离">1.read uncommited  无隔离</h4>
+<p><code>SET @@session.transaction_isolation = 'READ-UNCOMMITTED';</code></p>
+<p>事务之间完全无隔离；</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">SET</span> <span class="o">@@</span><span class="k">session</span><span class="p">.</span><span class="n">transaction_isolation</span> <span class="o">=</span> <span class="s1">&#39;READ-UNCOMMITTED&#39;</span><span class="p">;</span>
+<span class="k">create</span> <span class="k">database</span> <span class="n">test</span><span class="p">;</span>
+<span class="n">use</span> <span class="n">test</span><span class="p">;</span>
+<span class="k">create</span> <span class="k">table</span> <span class="n">test</span><span class="p">(</span><span class="n">id</span> <span class="nb">int</span> <span class="k">primary</span> <span class="k">key</span><span class="p">);</span>
+<span class="k">insert</span> <span class="k">into</span> <span class="n">test</span><span class="p">(</span><span class="n">id</span><span class="p">)</span> <span class="k">values</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+
+
+<span class="c1">-- transaction 1
+</span><span class="c1"></span><span class="k">begin</span><span class="p">;</span>
+<span class="k">update</span> <span class="n">test</span> <span class="k">set</span> <span class="n">id</span> <span class="o">=</span> <span class="mi">2</span> <span class="k">where</span> <span class="n">id</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">test</span><span class="p">;</span> <span class="c1">-- 此时看到一条ID为2的记录
+</span><span class="c1"></span>
+
+<span class="c1">-- transaction 2;
+</span><span class="c1"></span><span class="n">use</span> <span class="n">test</span><span class="p">;</span>
+<span class="k">begin</span><span class="p">;</span>
+<span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">test</span><span class="p">;</span> <span class="c1">-- 此时看到一条 ID 为 2 的记录
+</span></code></pre></td></tr></table>
+</div>
+</div><h4 id="2-read-commited">2. read commited</h4>
+<p><code>SET @@session.transaction_isolation = 'READ-COMMITTED';</code></p>
+<p>读已经提交；</p>
+<h4 id="3-repeatable-read">3. repeatable read</h4>
+<ol>
+<li>
+<p>可重复读</p>
+</li>
+<li>
+<p>不可重复读</p>
+</li>
+<li>
+<p>串行</p>
+</li>
+</ol>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">atony2099</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        0001-01-01
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        <a class="prev" href="/post/db/redis/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default"></span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/golang/base/">
+            <span class="next-text nav-default"></span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="atony2099/atony2099.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:atony2099@gamil.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://github.com/atony2099" class="iconfont icon-github" title="github"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> site pv: <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> site uv: <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">atony2099</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.cddea96674a99fd8cea50d36fb19d9c91f497feea4af5ce4596afd2dbaab9202.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -112,18 +112,60 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/golang/map/">interface</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/golang/type/">Golang 中的类型</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2020-05-14 </span>
       
-        <span class="more-meta"> 10 words </span>
+        <span class="more-meta"> 210 words </span>
         <span class="more-meta"> 1 min read </span>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      map的两种实现方式
+      类型分类 1. 基础类型 1 2 3 4 int float32, float64 bool string 2.复合类型 container arrary slice map struct pointer channel function interface 3. 类型的声明（type declaration） 1. type definitions vs type alias 1 2 3 4 5 6 7 8
+    </div>
+    <div class="read-more">
+      <a href="/post/golang/type/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/golang/interface/">interface</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-05-14 </span>
+      
+        <span class="more-meta"> 222 words </span>
+        <span class="more-meta"> 1 min read </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      Interfaces Explained 1. what is is a type contain a set of method signature 2. used for 引入一个中间层，调用方和实现方解耦 3.type assertion 1 2 var a interface{} = 100; var aa,ok = a.(string) 4. compile time check 5. interface with pointer and value if methods receiver is value; then value and pointer implement the interface for
+    </div>
+    <div class="read-more">
+      <a href="/post/golang/interface/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/golang/map/">map</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-05-14 </span>
+      
+        <span class="more-meta"> 873 words </span>
+        <span class="more-meta"> 2 mins read </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      reference: 哈希表 Map实现原理分析 深度解密Go语言之 map map的实现 key 通过 hash function映射数组的指定位置上 解决冲突的方式 如果该位置上已经有存储值
     </div>
     <div class="read-more">
       <a href="/post/golang/map/" class="read-more-link">Read more...</a>
@@ -172,48 +214,6 @@ feature if a methods is called, the receiver will be copy every time;
     </div>
     <div class="read-more">
       <a href="/post/golang/test/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/channel/">深入了解GPS调度</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2020-04-30 </span>
-      
-        <span class="more-meta"> 166 words </span>
-        <span class="more-meta"> 1 min read </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      GPS 1. schedule 3. 为什么 2. channel 1. 数据结构 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 type hchan struct { qcount uint // total data in the queue dataqsiz uint // size of the circular queue buf unsafe.Pointer // points to an array of dataqsiz elements elemsize uint16 closed uint32 elemtype *_type
-    </div>
-    <div class="read-more">
-      <a href="/post/channel/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/cpu/">Cpu</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2020-04-01 </span>
-      
-        <span class="more-meta"> 728 words </span>
-        <span class="more-meta"> 2 mins read </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      [计算机科学速成课】40集全 Computer - CPU(Central Processing Unit) Architecture of the central processing unit (CPU) Different Classes of CPU Registers cpu control unit: 从内存中获取指令(instructions)，通过控制寄存器单元和运算单
-    </div>
-    <div class="read-more">
-      <a href="/post/cpu/" class="read-more-link">Read more...</a>
     </div>
   </div>
 </article>
