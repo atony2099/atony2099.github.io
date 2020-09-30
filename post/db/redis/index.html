@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="atony2099" /><meta name="description" content="redis 数据类型 string container list hash set zset bitmap and 缓存问题 大量查询语句绕过缓存，直接落在数据库上 fix: 熔断；降级 1. 缓存穿透 (cache peneration) 查询的语句在db中始终不存在，导致cach" /><meta name="keywords" content="golang, develop, hugo" />
+<meta name="author" content="atony2099" /><meta name="description" content="redis reference Redis: Pipelining, Transactions and Lua Scripts Transactions SDS 与 C 字符串的区别 Redis字符串类型内部编码剖析 overview ![79da7093ed998a99d9abe91e610b74e7(1)](https://cdn.jsdelivr.net/gh/atony2099/imgs@master/20200926/79da7093ed998a99d9abe91e610b74e7 (1).jpg) 1. 应用维度 &amp;amp;&amp;amp; 代码维度 2.三条主线 1. 高性能 2. 高可靠 3. 高拓展 learning 1. monitor a redis" /><meta name="keywords" content="golang, develop, hugo" />
 
 
 
@@ -40,20 +40,20 @@
 
 
 <meta property="og:title" content="" />
-<meta property="og:description" content="redis 数据类型 string container list hash set zset bitmap and 缓存问题 大量查询语句绕过缓存，直接落在数据库上 fix: 熔断；降级 1. 缓存穿透 (cache peneration) 查询的语句在db中始终不存在，导致cach" />
+<meta property="og:description" content="redis reference Redis: Pipelining, Transactions and Lua Scripts Transactions SDS 与 C 字符串的区别 Redis字符串类型内部编码剖析 overview ![79da7093ed998a99d9abe91e610b74e7(1)](https://cdn.jsdelivr.net/gh/atony2099/imgs@master/20200926/79da7093ed998a99d9abe91e610b74e7 (1).jpg) 1. 应用维度 &amp;&amp; 代码维度 2.三条主线 1. 高性能 2. 高可靠 3. 高拓展 learning 1. monitor a redis" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/post/db/redis/" />
 
 <meta itemprop="name" content="">
-<meta itemprop="description" content="redis 数据类型 string container list hash set zset bitmap and 缓存问题 大量查询语句绕过缓存，直接落在数据库上 fix: 熔断；降级 1. 缓存穿透 (cache peneration) 查询的语句在db中始终不存在，导致cach">
+<meta itemprop="description" content="redis reference Redis: Pipelining, Transactions and Lua Scripts Transactions SDS 与 C 字符串的区别 Redis字符串类型内部编码剖析 overview ![79da7093ed998a99d9abe91e610b74e7(1)](https://cdn.jsdelivr.net/gh/atony2099/imgs@master/20200926/79da7093ed998a99d9abe91e610b74e7 (1).jpg) 1. 应用维度 &amp;&amp; 代码维度 2.三条主线 1. 高性能 2. 高可靠 3. 高拓展 learning 1. monitor a redis">
 
-<meta itemprop="wordCount" content="178">
+<meta itemprop="wordCount" content="579">
 
 
 
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content=""/>
-<meta name="twitter:description" content="redis 数据类型 string container list hash set zset bitmap and 缓存问题 大量查询语句绕过缓存，直接落在数据库上 fix: 熔断；降级 1. 缓存穿透 (cache peneration) 查询的语句在db中始终不存在，导致cach"/>
+<meta name="twitter:description" content="redis reference Redis: Pipelining, Transactions and Lua Scripts Transactions SDS 与 C 字符串的区别 Redis字符串类型内部编码剖析 overview ![79da7093ed998a99d9abe91e610b74e7(1)](https://cdn.jsdelivr.net/gh/atony2099/imgs@master/20200926/79da7093ed998a99d9abe91e610b74e7 (1).jpg) 1. 应用维度 &amp;&amp; 代码维度 2.三条主线 1. 高性能 2. 高可靠 3. 高拓展 learning 1. monitor a redis"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -121,8 +121,8 @@
       <div class="post-meta">
         <span class="post-time"> 0001-01-01 </span>
         
-          <span class="more-meta"> 178 words </span>
-          <span class="more-meta"> 1 min read </span>
+          <span class="more-meta"> 579 words </span>
+          <span class="more-meta"> 2 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
     </header>
@@ -132,6 +132,43 @@
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
   <ul>
+    <li><a href="#reference">reference</a></li>
+    <li><a href="#overview">overview</a>
+      <ul>
+        <li><a href="#1-应用维度--代码维度">1. 应用维度 &amp;&amp; 代码维度</a></li>
+        <li><a href="#2三条主线">2.三条主线</a></li>
+      </ul>
+    </li>
+    <li><a href="#learning">learning</a>
+      <ul>
+        <li><a href="#1-monitor-a-redis">1. monitor a redis</a></li>
+        <li><a href="#heading"></a></li>
+      </ul>
+    </li>
+    <li><a href="#how-a-redis-command-be-excute">how a redis command be excute</a>
+      <ul>
+        <li><a href="#1-建立连接">1. 建立连接</a></li>
+        <li><a href="#2-通信协议">2. 通信协议</a></li>
+        <li><a href="#3">3.</a></li>
+      </ul>
+    </li>
+    <li><a href="#data-types">data types</a>
+      <ul>
+        <li><a href="#0-redisobject">0. redisObject</a></li>
+      </ul>
+    </li>
+    <li><a href="#1-strings-implements">1. strings implements</a>
+      <ul>
+        <li><a href="#1-structure">1. structure</a></li>
+        <li><a href="#2-sds-vs-c-string">2. sds vs c string</a></li>
+      </ul>
+    </li>
+    <li><a href="#piping-vs--transaction-vs-script">piping vs  transaction vs script</a>
+      <ul>
+        <li><a href="#1-pipeline">1. pipeline</a></li>
+        <li><a href="#2-transaction">2. transaction</a></li>
+      </ul>
+    </li>
     <li><a href="#数据类型">数据类型</a>
       <ul>
         <li><a href="#bitmap-and">bitmap and</a></li>
@@ -150,6 +187,123 @@
 </div>
     <div class="post-content">
       <h1 id="redis">redis</h1>
+<h2 id="reference">reference</h2>
+<p><a href="https://rafaeleyng.github.io/redis-pipelining-transactions-and-lua-scripts">Redis: Pipelining, Transactions and Lua Scripts</a></p>
+<p><a href="https://redis.io/topics/transactions">Transactions</a>
+<a href="http://redisbook.com/preview/sds/different_between_sds_and_c_string.html">SDS 与 C 字符串的区别</a></p>
+<p><a href="https://juejin.im/post/6844903653791236103">Redis字符串类型内部编码剖析</a></p>
+<h2 id="overview">overview</h2>
+<p>![79da7093ed998a99d9abe91e610b74e7(1)](<a href="https://cdn.jsdelivr.net/gh/atony2099/imgs@master/20200926/79da7093ed998a99d9abe91e610b74e7">https://cdn.jsdelivr.net/gh/atony2099/imgs@master/20200926/79da7093ed998a99d9abe91e610b74e7</a> (1).jpg)</p>
+<h3 id="1-应用维度--代码维度">1. 应用维度 &amp;&amp; 代码维度</h3>
+<h3 id="2三条主线">2.三条主线</h3>
+<h4 id="1-高性能">1. 高性能</h4>
+<h4 id="2-高可靠">2. 高可靠</h4>
+<h4 id="3-高拓展">3. 高拓展</h4>
+<h2 id="learning">learning</h2>
+<h3 id="1-monitor-a-redis">1. monitor a redis</h3>
+<h3 id="heading"></h3>
+<h2 id="how-a-redis-command-be-excute">how a redis command be excute</h2>
+<h3 id="1-建立连接">1. 建立连接</h3>
+<p>tcp/sockets</p>
+<h3 id="2-通信协议">2. 通信协议</h3>
+<p>redis serialaziton protocl</p>
+<h3 id="3">3.</h3>
+<ul>
+<li>For <strong>Simple Strings</strong> the first byte of the reply is &ldquo;+&rdquo;</li>
+<li>For <strong>Errors</strong> the first byte of the reply is &ldquo;-&rdquo;</li>
+<li>For <strong>Integers</strong> the first byte of the reply is &ldquo;:&rdquo;</li>
+<li>For <strong>Bulk Strings</strong> the first byte of the reply is &ldquo;$&rdquo;</li>
+<li>For <strong>Arrays</strong> the first byte of the reply is &ldquo;<code>*</code>&rdquo;</li>
+</ul>
+<h2 id="data-types">data types</h2>
+<ol>
+<li>strings</li>
+<li>lists</li>
+<li>sets</li>
+<li>hashes</li>
+<li>sorted sets</li>
+</ol>
+<h3 id="0-redisobject">0. redisObject</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="k">typedef</span> <span class="k">struct</span> <span class="n">redisObject</span> <span class="p">{</span>
+    <span class="kt">unsigned</span> <span class="nl">type</span><span class="p">:</span><span class="mi">4</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="nl">encoding</span><span class="p">:</span><span class="mi">4</span><span class="p">;</span>
+    <span class="kt">unsigned</span> <span class="nl">lru</span><span class="p">:</span><span class="mi">22</span><span class="p">;</span>        <span class="cm">/* lru time (relative to server.lruclock) */</span>
+    <span class="kt">int</span> <span class="n">refcount</span><span class="p">;</span>
+    <span class="kt">void</span> <span class="o">*</span><span class="n">ptr</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">robj</span><span class="p">;</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="1-strings-implements">1. strings implements</h2>
+<p><img src="https://cdn.jsdelivr.net/gh/atony2099/imgs@master/20200926/ce83d1346c9642fdbbf5ffbe701bfbe3.jpg" alt="ce83d1346c9642fdbbf5ffbe701bfbe3"></p>
+<ol>
+<li>
+<p>整数用 RedisObject 直接表示</p>
+</li>
+<li>
+<p>字符串用redisObject+ sds 表示</p>
+</li>
+</ol>
+<h3 id="1-structure">1. structure</h3>
+<p>simple dynamic strings: SDS</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-c" data-lang="c"><span class="k">struct</span> <span class="nf">__attribute__</span> <span class="p">((</span><span class="n">__packed__</span><span class="p">))</span> <span class="n">sdshdr8</span> <span class="p">{</span>
+    <span class="n">uint8_t</span> <span class="n">len</span><span class="p">;</span> <span class="cm">/* used */</span>
+    <span class="n">uint8_t</span> <span class="n">alloc</span><span class="p">;</span> <span class="cm">/* excluding the header and null terminator */</span>
+    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">flags</span><span class="p">;</span> <span class="cm">/* 3 lsb of type, 5 unused bits */</span>
+    <span class="kt">char</span> <span class="n">buf</span><span class="p">[];</span>
+<span class="p">};</span>
+
+
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="2-sds-vs-c-string">2. sds vs c string</h3>
+<ol>
+<li>通过提前记录将获取字符串长度的时间复杂度降为1</li>
+<li>保证不会缓冲区溢出</li>
+<li>通过预加载(free);惰性释放，减少内存分配的次数</li>
+</ol>
+<h2 id="piping-vs--transaction-vs-script">piping vs  transaction vs script</h2>
+<h3 id="1-pipeline">1. pipeline</h3>
+<p>send a bulk of commomds to the server once;</p>
+<p>but the command will be interleaved.</p>
+<h3 id="2-transaction">2. transaction</h3>
+<p>a set of commands  excuted atomically;</p>
+<h4 id="limitations-of-transaction">limitations of transaction</h4>
+<ol>
+<li>
+<p>Have no rollback mechanism</p>
+<p>if a semantic(runtime) error happen;</p>
+</li>
+</ol>
+<p>the error will be returned inside the list of the responses,but subsequent commands in the queue will be excuted normally.</p>
+<p>and the transactions won&rsquo;t be aborted</p>
+<ol start="2">
+<li></li>
+</ol>
+<h4 id="3-lua-script">3. lua script</h4>
+<p>a set of script excuted atomically</p>
 <h2 id="数据类型">数据类型</h2>
 <ol>
 <li>string</li>

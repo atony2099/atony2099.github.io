@@ -112,11 +112,77 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/golang/interface/">interface</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-05-14 </span>
+      
+        <span class="more-meta"> 222 words </span>
+        <span class="more-meta"> 1 min read </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      Interfaces Explained 1. what is is a type contain a set of method signature 2. used for 引入一个中间层，调用方和实现方解耦 3.type assertion 1 2 var a interface{} = 100; var aa,ok = a.(string) 4. compile time check 5. interface with pointer and value if methods receiver is value; then value and pointer implement the interface for
+    </div>
+    <div class="read-more">
+      <a href="/post/golang/interface/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/golang/map/">map</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-05-14 </span>
+      
+        <span class="more-meta"> 873 words </span>
+        <span class="more-meta"> 2 mins read </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      reference: 哈希表 Map实现原理分析 深度解密Go语言之 map map的实现 key 通过 hash function映射数组的指定位置上 解决冲突的方式 如果该位置上已经有存储值
+    </div>
+    <div class="read-more">
+      <a href="/post/golang/map/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/golang/methods/">methods</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-05-14 </span>
+      
+        <span class="more-meta"> 32 words </span>
+        <span class="more-meta"> 1 min read </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      Interfaces Explained
+what is? function + recevier
+pass by value ? pass parameters by copying the value or pointer
+feature if a methods is called, the receiver will be copy every time;
+    </div>
+    <div class="read-more">
+      <a href="/post/golang/methods/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/golang/test/">Test</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2020-05-14 </span>
       
-        <span class="more-meta"> 80 words </span>
+        <span class="more-meta"> 148 words </span>
         <span class="more-meta"> 1 min read </span>
     </div>
   </header>
@@ -148,73 +214,6 @@
     </div>
     <div class="read-more">
       <a href="/post/channel/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/cpu/">Cpu</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2020-04-01 </span>
-      
-        <span class="more-meta"> 713 words </span>
-        <span class="more-meta"> 2 mins read </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      [计算机科学速成课】40集全 Computer - CPU(Central Processing Unit) Architecture of the central processing unit (CPU) Different Classes of CPU Registers cpu control unit: 从内存中获取指令(instructions)，通过控制寄存器单元和运算单
-    </div>
-    <div class="read-more">
-      <a href="/post/cpu/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/database/mysql/">数据库索引</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2020-03-30 </span>
-      <div class="post-category">
-          <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"> 数据库 </a>
-          </div>
-        <span class="more-meta"> 1424 words </span>
-        <span class="more-meta"> 3 mins read </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      1. 从 binary search tree 到 b+ tree 数据库索引为什么使用B+树？ MySQL索引背后的数据结构及算法原理 1分钟了解MyISAM与InnoDB的索引差异 Introduction of B-Tree 我必须
-    </div>
-    <div class="read-more">
-      <a href="/post/database/mysql/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/database/trasaction/">数据库索引</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2020-03-30 </span>
-      <div class="post-category">
-          <a href="/categories/mysql/"> mysql </a>
-          </div>
-        <span class="more-meta"> 64 words </span>
-        <span class="more-meta"> 1 min read </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      mysql 的执行过程 查询缓存 解析器:语法解析 查询优化器：生成最佳执行计划 查询存储引擎：根据执行计划，调用存储引擎相关接口，完成实际的查找
-    </div>
-    <div class="read-more">
-      <a href="/post/database/trasaction/" class="read-more-link">Read more...</a>
     </div>
   </div>
 </article>

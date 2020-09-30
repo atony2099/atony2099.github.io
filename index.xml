@@ -12,6 +12,41 @@
     
     
     <item>
+      <title>短变量声明</title>
+      <link>http://localhost:1313/post/golang/variables/</link>
+      <pubDate>Wed, 30 Sep 2020 14:10:34 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/golang/variables/</guid>
+      <description>是什么 hello :=&amp;quot;hello&amp;quot; 短变量声明(short variable declaration)是golang中声明变量的一种方式,是golang特有的语法，相比 var hello=&amp;</description>
+    </item>
+    
+    <item>
+      <title>command</title>
+      <link>http://localhost:1313/post/base/base/command/</link>
+      <pubDate>Tue, 15 Sep 2020 14:07:07 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/base/base/command/</guid>
+      <description>reference Difference between single and double quotes in Bash
+&#39; vs &#39;&amp;rsquo; &amp;lsquo;: single quotes won&amp;rsquo;t interpret anything; &amp;ldquo;&amp;quot;: double quotes will;
+text process 1. sed stream editor
+-i: edit file in-replacc
+1 2 3 4 5  &amp;gt; sed -n 1,2p a.txt // 1. print file with sepcify line &amp;gt; sed 1,2d a.txt // 2. print file except line 2 to 4; &amp;gt; sed /debian/d a.txt // 2. print file except a regex; &amp;gt; sed &amp;#39;s/old-text/new-text/g&amp;#39; input.</description>
+    </item>
+    
+    <item>
+      <title>gokit</title>
+      <link>http://localhost:1313/post/golang/gokit/</link>
+      <pubDate>Tue, 15 Sep 2020 08:12:43 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/golang/gokit/</guid>
+      <description>base structure   transport layer
+  endpoint layer
+   service layer
+   core bussiness logic
+ </description>
+    </item>
+    
+    <item>
       <title>gpm</title>
       <link>http://localhost:1313/post/golang/gpm/</link>
       <pubDate>Mon, 14 Sep 2020 10:14:20 +0800</pubDate>
@@ -171,6 +206,51 @@ feature if a methods is called, the receiver will be copy every time;</descripti
     
     <item>
       <title></title>
+      <link>http://localhost:1313/post/base/base/git/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/post/base/base/git/</guid>
+      <description>git command git hook </description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost:1313/post/base/operate/io/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/post/base/operate/io/</guid>
+      <description>io 什么是I/O 计算机与外界(I/O设备)发生数据交换的过程； ![UntitledDiagram](https://cdn.jsdelivr.net/gh/atony2099/imgs@master/20200929/Untitled Diagram.png) reference System Call in OS: Types and Examples I/O Models Unix network programming charpter 6 - I/O Multiplexing I/O类型 方向: 输入: 键盘，鼠标 输出：打</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost:1313/post/base/operate/linux/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/post/base/operate/linux/</guid>
+      <description>linux reference Introduction of System Call System Call in OS: Types and Examples overview linux mechanism Linux command mechanism 1. linux base structure kernel space vs user spacce 1. the difference between kernel and user space memroy: the memory is divided into two distinct areas, user and kernel Access: kernel:full access limit access 1.the system call 1. what is ? a user program request a service from the kernel 2.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost:1313/post/base/operate/untitled/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/post/base/operate/untitled/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost:1313/post/bigdata/spark/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/post/bigdata/spark/</guid>
+      <description>spark Hello Spark! | Spark，从入门到精通 Spark SQL 初探： 使用大数据分析2000万数据</description>
+    </item>
+    
+    <item>
+      <title></title>
       <link>http://localhost:1313/post/db/mysql/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
@@ -184,7 +264,7 @@ feature if a methods is called, the receiver will be copy every time;</descripti
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/post/db/redis/</guid>
-      <description>redis 数据类型 string container list hash set zset bitmap and 缓存问题 大量查询语句绕过缓存，直接落在数据库上 fix: 熔断；降级 1. 缓存穿透 (cache peneration) 查询的语句在db中始终不存在，导致cach</description>
+      <description>redis reference Redis: Pipelining, Transactions and Lua Scripts Transactions SDS 与 C 字符串的区别 Redis字符串类型内部编码剖析 overview ![79da7093ed998a99d9abe91e610b74e7(1)](https://cdn.jsdelivr.net/gh/atony2099/imgs@master/20200926/79da7093ed998a99d9abe91e610b74e7 (1).jpg) 1. 应用维度 &amp;amp;&amp;amp; 代码维度 2.三条主线 1. 高性能 2. 高可靠 3. 高拓展 learning 1. monitor a redis</description>
     </item>
     
     <item>
@@ -202,7 +282,7 @@ feature if a methods is called, the receiver will be copy every time;</descripti
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/post/golang/base/</guid>
-      <description>golang golang 特性 1. 轻类型；去掉类型； type+ methods 方式 2. 支持高并发 3. /</description>
+      <description>golang golang 特性 1. 轻类型；去掉类型； type+ methods 方式 2. 支持高并发 3.</description>
     </item>
     
     <item>
@@ -221,7 +301,25 @@ Built-in operators    Operation Result Description     0011 &amp;amp; 0101 0001 
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/post/golang/command/</guid>
-      <description>command spaw a process 1  dateCmd := exec.Command(&amp;#34;date&amp;#34;)   </description>
+      <description>command spaw a process 1  dateCmd := exec.Command(&amp;#34;date&amp;#34;)   11</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost:1313/post/golang/concurrency/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/post/golang/concurrency/</guid>
+      <description>golang 并发模式</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost:1313/post/golang/context/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/post/golang/context/</guid>
+      <description>context pass value pass request-scoped data;</description>
     </item>
     
     <item>
@@ -235,12 +333,30 @@ Built-in operators    Operation Result Description     0011 &amp;amp; 0101 0001 
     
     <item>
       <title></title>
+      <link>http://localhost:1313/post/golang/gomico/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/post/golang/gomico/</guid>
+      <description>go micro The following logs have added the is_sanbox field 预算端广告点击状态, topic: dt_ad_click 预算端广告请求状态，topic:dt_ad_req_status 预算端广告展示状态，topic:</description>
+    </item>
+    
+    <item>
+      <title></title>
       <link>http://localhost:1313/post/golang/gopkg/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/post/golang/gopkg/</guid>
       <description>golang package flag flag implements command-line flag parsing.
 1    </description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost:1313/post/golang/kafka/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/post/golang/kafka/</guid>
+      <description></description>
     </item>
     
     <item>
@@ -309,6 +425,15 @@ basic syntax    Control Structure Definition     {{/* a comment */}} Defines a c
       
       <guid>http://localhost:1313/post/micro/base/</guid>
       <description>基础概念 ##服务: 熔断 降级 熔断: 被动 降级: 主动 使用本地方法替换远程服务。</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost:1313/post/micro/grpc/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/post/micro/grpc/</guid>
+      <description>rpc Compare gRPC services with HTTP APIs base concepts stub stub is a piece of code used to be a a temporary substitute for yet-to-be-developed code. or the remote methods; 1 2 3 4 5 6 7 8 temperature = ThermometerRead(Outside) if temperature &amp;gt; 40 then print &amp;#34;It is hot!&amp;#34; end if function ThermometerRead(Source insideOrOutside) return 28 end function what is rpc ? remote procedure call: excute a procedure(a set</description>
     </item>
     
     <item>
