@@ -2,8 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://localhost:1313/post/golang/function/</loc>
+    <lastmod>2020-10-11T20:16:30+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>http://localhost:1313/post/</loc>
-    <lastmod>2020-09-30T14:10:34+08:00</lastmod>
+    <lastmod>2020-10-11T20:16:30+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -238,6 +245,12 @@
   </url>
   
   <url>
+    <loc>http://localhost:1313/post/base/data-type-data-structure/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>http://localhost:1313/post/base/operate/io/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -245,6 +258,12 @@
   
   <url>
     <loc>http://localhost:1313/post/base/operate/linux/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/post/base/operate/my-plane/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -316,6 +335,12 @@
   </url>
   
   <url>
+    <loc>http://localhost:1313/post/golang/fmt/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>http://localhost:1313/post/golang/gomico/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -359,6 +384,12 @@
   
   <url>
     <loc>http://localhost:1313/post/golang/template/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>http://localhost:1313/post/golang/trace/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>

@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Go基础1, 函数 function - atony2099 develop note</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="atony2099" /><meta name="description" content="函数是每门编程语言重要组成部分，golang作为一门现代化的语言，函数上有自己的一些特点 特点 1. 支持可变参数函数(variadic function) 如果一个函" /><meta name="keywords" content="golang, develop, hugo" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.69.0 with theme even" />
+
+
+<link rel="canonical" href="http://localhost:1313/post/golang/function/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.78f8f17bab244b9ee62ad16480c9584d5fc2db06ae20681d1ca225cefd80767c.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Go基础1, 函数 function" />
+<meta property="og:description" content="函数是每门编程语言重要组成部分，golang作为一门现代化的语言，函数上有自己的一些特点 特点 1. 支持可变参数函数(variadic function) 如果一个函" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/golang/function/" />
+<meta property="article:published_time" content="2020-10-11T20:16:30+08:00" />
+<meta property="article:modified_time" content="2020-10-11T20:16:30+08:00" />
+<meta itemprop="name" content="Go基础1, 函数 function">
+<meta itemprop="description" content="函数是每门编程语言重要组成部分，golang作为一门现代化的语言，函数上有自己的一些特点 特点 1. 支持可变参数函数(variadic function) 如果一个函">
+<meta itemprop="datePublished" content="2020-10-11T20:16:30&#43;08:00" />
+<meta itemprop="dateModified" content="2020-10-11T20:16:30&#43;08:00" />
+<meta itemprop="wordCount" content="1246">
+
+
+
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Go基础1, 函数 function"/>
+<meta name="twitter:description" content="函数是每门编程语言重要组成部分，golang作为一门现代化的语言，函数上有自己的一些特点 特点 1. 支持可变参数函数(variadic function) 如果一个函"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">atony2099 develop note</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About me</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">atony2099 develop note</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About me</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Go基础1, 函数 function</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-10-11 </span>
+        
+          <span class="more-meta"> 1246 words </span>
+          <span class="more-meta"> 3 mins read </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#特点">特点</a>
+      <ul>
+        <li><a href="#1-支持可变参数函数variadic-function">1. 支持可变参数函数(variadic function)</a></li>
+        <li><a href="#2-可以定义多个返回值并为返回值命名">2. 可以定义多个返回值并为返回值命名</a></li>
+        <li><a href="#3-支持一等函数first-class-function和高阶函数high-order-function">3. 支持一等函数（first class function)和高阶函数(high order function)</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>函数是每门编程语言重要组成部分，golang作为一门现代化的语言，函数上有自己的一些特点</p>
+<h2 id="特点">特点</h2>
+<h3 id="1-支持可变参数函数variadic-function">1. 支持可变参数函数(variadic function)</h3>
+<p>如果一个函数的参数数量是可变的，则该函数是可变参数函数</p>
+<p>Go中可变参数函数的最后一位参数使用 <code>参数名 ...类型</code>的格式声明，表明该类型参数可传入的数量是不限制的</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">function_name</span><span class="p">(</span><span class="nx">para1</span> <span class="kd">type</span><span class="p">,</span><span class="nx">para2</span> <span class="kd">type</span><span class="p">,</span> <span class="nx">para3</span> <span class="o">...</span><span class="kd">type</span><span class="p">){</span>
+<span class="c1">// code...
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>要点：</p>
+<ol>
+<li>在函数内部 <code>...type</code>参数是用一个slice类型的变量表示</li>
+<li>可以用 <code>slice类型变量...</code>方式传入可变参数</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="s">&#34;fmt&#34;</span>
+
+<span class="kd">func</span> <span class="nf">sum</span><span class="p">(</span><span class="nx">init</span> <span class="kt">int</span><span class="p">,</span><span class="nx">nums</span> <span class="o">...</span><span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">num</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">nums</span> <span class="p">{</span> <span class="c1">// nums是slice 类型
+</span><span class="c1"></span>        <span class="nx">init</span> <span class="o">+=</span> <span class="nx">num</span>
+    <span class="p">}</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">total</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+
+	<span class="c1">// 参数的数量可变
+</span><span class="c1"></span>    <span class="nf">sum</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1">// 3 
+</span><span class="c1"></span>    <span class="nf">sum</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>  <span class="c1">// 6
+</span><span class="c1"></span>
+    <span class="nx">nums</span> <span class="o">:=</span> <span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">}</span>
+    <span class="nf">sum</span><span class="p">(</span><span class="nx">nums</span><span class="o">...</span><span class="p">)</span>  <span class="c1">//  传入可变参数
+</span><span class="c1"></span><span class="p">}</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="2-可以定义多个返回值并为返回值命名">2. 可以定义多个返回值并为返回值命名</h3>
+<p>函数返回多个值是开发中很常见的需求，然而大部分语言都不直接支持返回多个值，需程序员们另辟蹊径，通常解决方法是把多个值用对象或者数组包装起来，如 js 可以把多个返回值放在一个object中</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">getNames</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">firstName</span> <span class="o">=</span> <span class="s1">&#39;John&#39;</span><span class="p">,</span>
+        <span class="nx">lastName</span> <span class="o">=</span> <span class="s1">&#39;Doe&#39;</span><span class="p">;</span>
+ 
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="nx">firstName</span><span class="p">,</span>
+        <span class="nx">lastName</span>
+    <span class="p">};</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Go则在语言层面直接支持了这一特性</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+<span class="kn">import</span> <span class="s">&#34;fmt&#34;</span>
+
+<span class="kd">func</span> <span class="nf">swap</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span> <span class="kt">string</span><span class="p">)</span> <span class="p">(</span><span class="kt">string</span><span class="p">,</span> <span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">x</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">a</span><span class="p">,</span> <span class="nx">b</span> <span class="o">:=</span> <span class="nf">swap</span><span class="p">(</span><span class="s">&#34;hello&#34;</span><span class="p">,</span> <span class="s">&#34;world&#34;</span><span class="p">)</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>同时可以给返回值命名，从而使得函数更加清晰，可读性更强</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">RGBA</span><span class="p">()</span> <span class="p">(</span><span class="nx">r</span><span class="p">,</span> <span class="nx">g</span><span class="p">,</span> <span class="nx">b</span><span class="p">,</span> <span class="nx">a</span> <span class="kt">uint32</span><span class="p">)</span> <span class="p">{</span>
+	<span class="o">...</span><span class="p">..</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">nextInt</span><span class="p">(</span><span class="nx">b</span> <span class="p">[]</span><span class="kt">byte</span><span class="p">,</span> <span class="nx">pos</span> <span class="kt">int</span><span class="p">)</span> <span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">nextPos</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+  <span class="o">...</span><span class="p">.</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>如果返回值已经命名，函数可以直接return不携带返回值,这种称为naked return(裸返回)， naked return在较短的函数中使用可以简化代码，但一般不建议在较长的函数内使用，它会降低函数可读性</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">split</span><span class="p">(</span><span class="nx">sum</span> <span class="kt">int</span><span class="p">)</span> <span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">x</span> <span class="p">=</span> <span class="nx">sum</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">/</span> <span class="mi">9</span>
+	<span class="nx">y</span> <span class="p">=</span> <span class="nx">sum</span> <span class="o">-</span> <span class="nx">x</span>
+	<span class="k">return</span>
+<span class="p">}</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="3-支持一等函数first-class-function和高阶函数high-order-function">3. 支持一等函数（first class function)和高阶函数(high order function)</h3>
+<p>一等函数, 即把函数的的看成和其他变量类型一样，允许把函数赋值给一个变量，允许把函数作为其他函数的参数和返回值。</p>
+<p>如果一个函数的参数或者返回值包含另一个函数，则该函数是高阶函数。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="s">&#34;fmt&#34;</span>
+
+<span class="kd">func</span> <span class="nf">sayHello</span><span class="p">()</span> <span class="kt">string</span> <span class="p">{</span>
+	<span class="k">return</span> <span class="s">&#34;hello, &#34;</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">greeting</span><span class="p">(</span><span class="nx">sayHello</span> <span class="kd">func</span><span class="p">()</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">name</span> <span class="kt">string</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// sayHello 函数被当做greeting函数的一个参数
+</span><span class="c1"></span>	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nf">sayHello</span><span class="p">()</span> <span class="o">+</span> <span class="nx">name</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nf">greeting</span><span class="p">(</span><span class="nx">sayHello</span><span class="p">,</span> <span class="s">&#34;go&#34;</span><span class="p">)</span>  <span class="c1">// hello, go
+</span><span class="c1"></span><span class="p">}</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><p>高阶函数的写法可以提高我们代码更加简洁优雅。如Go的排序函数Slice,通过传入less函数实现排序:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">func</span> <span class="nf">Slice</span><span class="p">(</span><span class="nx">slice</span> <span class="kd">interface</span><span class="p">{},</span> <span class="nx">less</span> <span class="kd">func</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="nx">j</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">bool</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">rv</span> <span class="o">:=</span> <span class="nf">reflectValueOf</span><span class="p">(</span><span class="nx">slice</span><span class="p">)</span>
+	<span class="nx">swap</span> <span class="o">:=</span> <span class="nf">reflectSwapper</span><span class="p">(</span><span class="nx">slice</span><span class="p">)</span>
+	<span class="nx">length</span> <span class="o">:=</span> <span class="nx">rv</span><span class="p">.</span><span class="nf">Len</span><span class="p">()</span>
+	<span class="nf">quickSort_func</span><span class="p">(</span><span class="nx">lessSwap</span><span class="p">{</span><span class="nx">less</span><span class="p">,</span> <span class="nx">swap</span><span class="p">},</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">length</span><span class="p">,</span> <span class="nf">maxDepth</span><span class="p">(</span><span class="nx">length</span><span class="p">))</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>使用：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+	<span class="s">&#34;fmt&#34;</span>
+	<span class="s">&#34;sort&#34;</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+	<span class="nx">people</span> <span class="o">:=</span> <span class="p">[]</span><span class="kd">struct</span> <span class="p">{</span>
+		<span class="nx">Name</span> <span class="kt">string</span>
+		<span class="nx">Age</span>  <span class="kt">int</span>
+	<span class="p">}{</span>
+		<span class="p">{</span><span class="s">&#34;Gopher&#34;</span><span class="p">,</span> <span class="mi">7</span><span class="p">},</span>
+		<span class="p">{</span><span class="s">&#34;Alice&#34;</span><span class="p">,</span> <span class="mi">55</span><span class="p">},</span>
+		<span class="p">{</span><span class="s">&#34;Vera&#34;</span><span class="p">,</span> <span class="mi">24</span><span class="p">},</span>
+		<span class="p">{</span><span class="s">&#34;Bob&#34;</span><span class="p">,</span> <span class="mi">75</span><span class="p">},</span>
+	<span class="p">}</span>
+  
+  
+	<span class="nx">sort</span><span class="p">.</span><span class="nf">Slice</span><span class="p">(</span><span class="nx">people</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="nx">j</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">bool</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">people</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">Name</span> <span class="p">&lt;</span> <span class="nx">people</span><span class="p">[</span><span class="nx">j</span><span class="p">].</span><span class="nx">Name</span> <span class="p">})</span> <span class="c1">// 按照 Name排序
+</span><span class="c1"></span>	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;By name:&#34;</span><span class="p">,</span> <span class="nx">people</span><span class="p">)</span> <span class="c1">// By name: [{Alice 55} {Bob 75} {Gopher 7} {Vera 24}]
+</span><span class="c1"></span>
+	<span class="nx">sort</span><span class="p">.</span><span class="nf">Slice</span><span class="p">(</span><span class="nx">people</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="nx">j</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">bool</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">people</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">Age</span> <span class="p">&lt;</span> <span class="nx">people</span><span class="p">[</span><span class="nx">j</span><span class="p">].</span><span class="nx">Age</span> <span class="p">})</span> <span class="c1">// 按照 Age 排序
+</span><span class="c1"></span>	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;By age:&#34;</span><span class="p">,</span> <span class="nx">people</span><span class="p">)</span> <span class="c1">// By age: [{Gopher 7} {Vera 24} {Alice 55} {Bob 75}]
+</span><span class="c1"></span><span class="p">}</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="闭包closure">闭包(closure)</h4>
+<p>闭包，是由一个函数与它引用的外部变量构成,可以理解它是一个持有外部变量的特殊函数,闭包通常出现在高阶函数中</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="s">&#34;fmt&#34;</span>
+
+<span class="kd">func</span> <span class="nf">intSeq</span><span class="p">()</span> <span class="kd">func</span><span class="p">()</span> <span class="kt">int</span> <span class="p">{</span>
+	<span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span>
+	<span class="k">return</span> <span class="kd">func</span><span class="p">()</span> <span class="kt">int</span> <span class="p">{</span> <span class="c1">// 返回函数与i构成一个闭包
+</span><span class="c1"></span>		<span class="nx">i</span><span class="o">++</span>
+		<span class="k">return</span> <span class="nx">i</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+
+	<span class="nx">nextInt</span> <span class="o">:=</span> <span class="nf">intSeq</span><span class="p">()</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nf">nextInt</span><span class="p">())</span> <span class="c1">// 1
+</span><span class="c1"></span>	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nf">nextInt</span><span class="p">())</span> <span class="c1">// 2
+</span><span class="c1"></span>	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nf">nextInt</span><span class="p">())</span> <span class="c1">// 3
+</span><span class="c1"></span><span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>intSeq 函数返回一个闭包，该闭包持有i变量，在Go内部实际上是用一个结构体表示</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-go" data-lang="go"><span class="kd">type</span> <span class="nx">Closure</span> <span class="nx">Struct</span> <span class="p">{</span>
+	<span class="nx">i</span> <span class="o">*</span><span class="kt">int</span>
+	<span class="nx">f</span> <span class="kd">func</span><span class="p">()</span><span class="kt">int</span>
+<span class="p">}</span>
+
+</code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">atony2099</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-10-11
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/golang/variables/">
+            <span class="next-text nav-default">短变量声明</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="atony2099/atony2099.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:atony2099@gamil.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://github.com/atony2099" class="iconfont icon-github" title="github"></a>
+  <a href="http://localhost:1313/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> site pv: <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> site uv: <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">atony2099</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.cddea96674a99fd8cea50d36fb19d9c91f497feea4af5ce4596afd2dbaab9202.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>atony2099 develop note</title>
+  <title> - atony2099 develop note</title>
   <meta name="renderer" content="webkit" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="atony2099" /><meta name="description" content="personal blog" /><meta name="keywords" content="golang, develop, hugo" />
+<meta name="author" content="atony2099" /><meta name="description" content="链路跟踪 1. 是什么？ 跟踪一个请求全流程 2. opentracing() 2. 基础概念 trace:一个完整请求 span: tags" /><meta name="keywords" content="golang, develop, hugo" />
 
 
 
@@ -26,9 +26,7 @@
 <meta name="generator" content="Hugo 0.69.0 with theme even" />
 
 
-<link rel="canonical" href="http://localhost:1313/" />
-  <link href="http://localhost:1313/index.xml" rel="alternate" type="application/rss+xml" title="atony2099 develop note" />
-  <link href="http://localhost:1313/index.xml" rel="feed" type="application/rss+xml" title="atony2099 develop note" />
+<link rel="canonical" href="http://localhost:1313/post/golang/trace/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -41,15 +39,21 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="atony2099 develop note" />
-<meta property="og:description" content="personal blog" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="http://localhost:1313/" />
-<meta property="og:updated_time" content="2014-04-09T00:00:00+00:00" />
-<meta itemprop="name" content="atony2099 develop note">
-<meta itemprop="description" content="personal blog"><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="atony2099 develop note"/>
-<meta name="twitter:description" content="personal blog"/>
+<meta property="og:title" content="" />
+<meta property="og:description" content="链路跟踪 1. 是什么？ 跟踪一个请求全流程 2. opentracing() 2. 基础概念 trace:一个完整请求 span: tags" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/golang/trace/" />
+
+<meta itemprop="name" content="">
+<meta itemprop="description" content="链路跟踪 1. 是什么？ 跟踪一个请求全流程 2. opentracing() 2. 基础概念 trace:一个完整请求 span: tags">
+
+<meta itemprop="wordCount" content="39">
+
+
+
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content="链路跟踪 1. 是什么？ 跟踪一个请求全流程 2. opentracing() 2. 基础概念 trace:一个完整请求 span: tags"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -109,127 +113,91 @@
     <main id="main" class="main">
       <div class="content-wrapper">
         <div id="content" class="content">
-          <section id="posts" class="posts">
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/golang/base/"></a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 0001-01-01 </span>
-      
-        <span class="more-meta"> 25 words </span>
-        <span class="more-meta"> 1 min read </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      golang golang 特性 1. 轻类型；去掉类型； type+ methods 方式 2. 支持高并发 3.
-    </div>
-    <div class="read-more">
-      <a href="/post/golang/base/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title"></h1>
 
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/golang/bitwise/"></a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 0001-01-01 </span>
-      
-        <span class="more-meta"> 60 words </span>
-        <span class="more-meta"> 1 min read </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      bitwise Bitwise operators [cheat sheet]
-Built-in operators    Operation Result Description     0011 &amp; 0101 0001 Bitwise AND   0011 | 0101 0111 Bitwise OR   0011 ^ 0101 0110 Bitwise XOR   ^0101 1010 Bitwise NOT (same as 1111 ^ 0101)   0011 &amp;^ 0101 0010 Bitclear (AND NOT)   00110101&lt;&lt;2 11010100 Left shift   00110101&lt;&lt;100 00000000 No upper limit on shift count   00110101&gt;&gt;2 00001101 Right shift    
-    </div>
-    <div class="read-more">
-      <a href="/post/golang/bitwise/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
+      <div class="post-meta">
+        <span class="post-time"> 0001-01-01 </span>
+        
+          <span class="more-meta"> 39 words </span>
+          <span class="more-meta"> 1 min read </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
+      </div>
+    </header>
 
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/golang/command/"></a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 0001-01-01 </span>
-      
-        <span class="more-meta"> 9 words </span>
-        <span class="more-meta"> 1 min read </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      command spaw a process 1  dateCmd := exec.Command(&#34;date&#34;)   11
-    </div>
-    <div class="read-more">
-      <a href="/post/golang/command/" class="read-more-link">Read more...</a>
-    </div>
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-是什么">1. 是什么？</a></li>
+    <li><a href="#2-opentracing">2. opentracing()</a></li>
+    <li><a href="#2-基础概念">2. 基础概念</a></li>
+  </ul>
+</nav>
   </div>
-</article>
+</div>
+    <div class="post-content">
+      <h1 id="链路跟踪">链路跟踪</h1>
+<h2 id="1-是什么">1. 是什么？</h2>
+<p>跟踪一个请求全流程</p>
+<h2 id="2-opentracing">2. opentracing()</h2>
+<h2 id="2-基础概念">2. 基础概念</h2>
+<ol>
+<li>trace:一个完整请求</li>
+<li>span:</li>
+<li>tags</li>
+</ol>
 
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/golang/concurrency/"></a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 0001-01-01 </span>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">atony2099</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        0001-01-01
+        
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
       
-        <span class="more-meta"> 5 words </span>
-        <span class="more-meta"> 1 min read </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      golang 并发模式
-    </div>
-    <div class="read-more">
-      <a href="/post/golang/concurrency/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/golang/context/"></a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 0001-01-01 </span>
-      
-        <span class="more-meta"> 6 words </span>
-        <span class="more-meta"> 1 min read </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      context pass value pass request-scoped data;
-    </div>
-    <div class="read-more">
-      <a href="/post/golang/context/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
-    </section>
-  
-  <nav class="pagination">
-    <a class="prev" href="/page/6/">
-        <i class="iconfont icon-left"></i>
-        <span class="prev-text">Prev</span>
-      </a>
-    <a class="next" href="/page/8/">
-        <span class="next-text">Next</span>
-        <i class="iconfont icon-right"></i>
-      </a>
-  </nav>
+      <nav class="post-nav">
+        <a class="prev" href="/post/golang/template/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default"></span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/golang/vscode/">
+            <span class="next-text nav-default"></span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
         </div>
         
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="atony2099/atony2099.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
 
       </div>
     </main>

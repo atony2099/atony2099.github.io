@@ -49,7 +49,7 @@
 <meta itemprop="description" content="是什么 hello :=&quot;hello&quot; 短变量声明(short variable declaration)是golang中声明变量的一种方式,是golang特有的语法，相比 var hello=&">
 <meta itemprop="datePublished" content="2020-09-30T14:10:34&#43;08:00" />
 <meta itemprop="dateModified" content="2020-09-30T14:10:34&#43;08:00" />
-<meta itemprop="wordCount" content="670">
+<meta itemprop="wordCount" content="647">
 
 
 
@@ -123,7 +123,7 @@
       <div class="post-meta">
         <span class="post-time"> 2020-09-30 </span>
         
-          <span class="more-meta"> 670 words </span>
+          <span class="more-meta"> 647 words </span>
           <span class="more-meta"> 2 mins read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
@@ -199,24 +199,18 @@
 </span><span class="lnt">21
 </span><span class="lnt">22
 </span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-go" data-lang="go"><span class="c1">// example1:
 </span><span class="c1"></span><span class="kn">package</span> <span class="nx">main</span>
 <span class="kn">import</span> <span class="s">&#34;fmt&#34;</span>
 <span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-	<span class="nx">a</span><span class="p">,</span> <span class="nx">c</span> <span class="o">:=</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">200</span>
-	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">a</span><span class="p">)</span> <span class="c1">// 0xc000014090
-</span><span class="c1"></span>	<span class="nx">a</span><span class="p">,</span> <span class="nx">d</span> <span class="o">:=</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">300</span>
-	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">c</span><span class="p">,</span> <span class="nx">d</span><span class="p">)</span> <span class="c1">// 100,200,300
-</span><span class="c1"></span>	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">a</span><span class="p">)</span>      <span class="c1">// 0xc000014090
-</span><span class="c1"></span><span class="p">}</span>
+	<span class="nx">a</span><span class="o">:=</span> <span class="mi">100</span>
 
-<span class="c1">// 编译通过
-</span><span class="c1">// 编译时报错： no new variables on left side of :=
+	<span class="nx">a</span> <span class="o">:=</span> <span class="mi">200</span>
+	<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="nx">a</span><span class="p">)</span> 
+<span class="p">}</span>
+<span class="c1">// 编译时报错： no new variables on left side of :=
 </span><span class="c1"></span>
 
 <span class="c1">// example2: 
@@ -290,8 +284,8 @@
 <span class="p">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>参考:</p>
-<p><a href="https://golang.org/ref/spec#Short_variable_declarations">Short variable declarations</a></p>
+</div><p>参考:
+<a href="https://golang.org/ref/spec#Short_variable_declarations">Short variable declarations</a></p>
 
     </div>
 
@@ -313,7 +307,11 @@
 <footer class="post-footer">
       
       <nav class="post-nav">
-        
+        <a class="prev" href="/post/golang/function/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Go基础1, 函数 function</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
         <a class="next" href="/post/base/base/command/">
             <span class="next-text nav-default">command</span>
             <span class="next-text nav-mobile">Next</span>

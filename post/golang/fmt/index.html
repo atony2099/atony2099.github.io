@@ -16,7 +16,11 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="atony2099" /><meta name="description" content="io 什么是I/O 计算机与外界(I/O设备)发生数据交换的过程； ![UntitledDiagram](https://cdn.jsdelivr.net/gh/atony2099/imgs@master/20200929/Untitled Diagram.png) reference System Call in OS: Types and Examples I/O Models Unix network programming charpter 6 - I/O Multiplexing I/O类型 方向: 输入: 键盘，鼠标 输出：打" /><meta name="keywords" content="golang, develop, hugo" />
+<meta name="author" content="atony2099" /><meta name="description" content="golang 50 Shades of Go: Traps, Gotchas, and Common Mistakes for New Golang Devs
+effective go
+The Go Programming Language Specification
+fmt 1. what is fmt fmt is a tool that automaically format source code
+2. do what? The gofmt program (also available as go fmt, which operates at the package level rather than source file level) reads a Go program and emits the source in a standard style of indentation and vertical alignme" /><meta name="keywords" content="golang, develop, hugo" />
 
 
 
@@ -26,7 +30,7 @@
 <meta name="generator" content="Hugo 0.69.0 with theme even" />
 
 
-<link rel="canonical" href="http://localhost:1313/post/base/operate/io/" />
+<link rel="canonical" href="http://localhost:1313/post/golang/fmt/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -40,20 +44,32 @@
 
 
 <meta property="og:title" content="" />
-<meta property="og:description" content="io 什么是I/O 计算机与外界(I/O设备)发生数据交换的过程； ![UntitledDiagram](https://cdn.jsdelivr.net/gh/atony2099/imgs@master/20200929/Untitled Diagram.png) reference System Call in OS: Types and Examples I/O Models Unix network programming charpter 6 - I/O Multiplexing I/O类型 方向: 输入: 键盘，鼠标 输出：打" />
+<meta property="og:description" content="golang 50 Shades of Go: Traps, Gotchas, and Common Mistakes for New Golang Devs
+effective go
+The Go Programming Language Specification
+fmt 1. what is fmt fmt is a tool that automaically format source code
+2. do what? The gofmt program (also available as go fmt, which operates at the package level rather than source file level) reads a Go program and emits the source in a standard style of indentation and vertical alignme" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="http://localhost:1313/post/base/operate/io/" />
+<meta property="og:url" content="http://localhost:1313/post/golang/fmt/" />
 
 <meta itemprop="name" content="">
-<meta itemprop="description" content="io 什么是I/O 计算机与外界(I/O设备)发生数据交换的过程； ![UntitledDiagram](https://cdn.jsdelivr.net/gh/atony2099/imgs@master/20200929/Untitled Diagram.png) reference System Call in OS: Types and Examples I/O Models Unix network programming charpter 6 - I/O Multiplexing I/O类型 方向: 输入: 键盘，鼠标 输出：打">
+<meta itemprop="description" content="golang 50 Shades of Go: Traps, Gotchas, and Common Mistakes for New Golang Devs
+effective go
+The Go Programming Language Specification
+fmt 1. what is fmt fmt is a tool that automaically format source code
+2. do what? The gofmt program (also available as go fmt, which operates at the package level rather than source file level) reads a Go program and emits the source in a standard style of indentation and vertical alignme">
 
-<meta itemprop="wordCount" content="126">
+<meta itemprop="wordCount" content="74">
 
 
 
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content=""/>
-<meta name="twitter:description" content="io 什么是I/O 计算机与外界(I/O设备)发生数据交换的过程； ![UntitledDiagram](https://cdn.jsdelivr.net/gh/atony2099/imgs@master/20200929/Untitled Diagram.png) reference System Call in OS: Types and Examples I/O Models Unix network programming charpter 6 - I/O Multiplexing I/O类型 方向: 输入: 键盘，鼠标 输出：打"/>
+<meta name="twitter:description" content="golang 50 Shades of Go: Traps, Gotchas, and Common Mistakes for New Golang Devs
+effective go
+The Go Programming Language Specification
+fmt 1. what is fmt fmt is a tool that automaically format source code
+2. do what? The gofmt program (also available as go fmt, which operates at the package level rather than source file level) reads a Go program and emits the source in a standard style of indentation and vertical alignme"/>
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -121,7 +137,7 @@
       <div class="post-meta">
         <span class="post-time"> 0001-01-01 </span>
         
-          <span class="more-meta"> 126 words </span>
+          <span class="more-meta"> 74 words </span>
           <span class="more-meta"> 1 min read </span>
         <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
       </div>
@@ -132,41 +148,26 @@
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#什么是io">什么是I/O</a></li>
-    <li><a href="#reference">reference</a></li>
-    <li><a href="#io类型">I/O类型</a></li>
-    <li><a href="#io-的过程">IO 的过程</a></li>
+    <li><a href="#fmt">fmt</a>
+      <ul>
+        <li><a href="#1-what-is-fmt">1. what is fmt</a></li>
+      </ul>
+    </li>
+    <li><a href="#2--do-what">2.  do what?</a></li>
   </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
-      <h1 id="io">io</h1>
-<h2 id="什么是io">什么是I/O</h2>
-<p>计算机与外界(I/O设备)发生数据交换的过程；</p>
-<p>![UntitledDiagram](<a href="https://cdn.jsdelivr.net/gh/atony2099/imgs@master/20200929/Untitled">https://cdn.jsdelivr.net/gh/atony2099/imgs@master/20200929/Untitled</a> Diagram.png)</p>
-<h2 id="reference">reference</h2>
-<p><a href="https://www.guru99.com/system-call-operating-system.html">System Call in OS: Types and Examples</a></p>
-<p><a href="http://www.masterraghu.com/subjects/np/introduction/unix_network_programming_v1.3/ch06lev1sec2.html"> I/O Models</a></p>
-<p><a href="http://yuweijun.github.io/blog/linux/2017/09/29/unix-network-programming-charpter-6-io-multiplexing.html">Unix network programming charpter 6 - I/O Multiplexing</a></p>
-<h2 id="io类型">I/O类型</h2>
-<p>方向:</p>
-<ol>
-<li>输入: 键盘，鼠标</li>
-<li>输出：打印机，显示器</li>
-<li>输入&amp;&amp;输出:网卡</li>
-</ol>
-<p>设备类型:</p>
-<ol>
-<li>存储</li>
-<li>网络</li>
-<li>输出: 显示器，声卡&hellip;.</li>
-</ol>
-<h2 id="io-的过程">IO 的过程</h2>
-<ol>
-<li>accepet</li>
-<li>operate</li>
-</ol>
+      <h1 id="golang">golang</h1>
+<p><a href="http://devs.cloudimmunity.com/gotchas-and-common-mistakes-in-go-golang/index.html#closed_ch_send">50 Shades of Go: Traps, Gotchas, and Common Mistakes for New Golang Devs</a></p>
+<p><a href="https://golang.org/doc/effective_go.html#multiple-returns">effective go</a></p>
+<p><a href="https://golang.org/ref/spec">The Go Programming Language Specification</a></p>
+<h2 id="fmt">fmt</h2>
+<h3 id="1-what-is-fmt">1. what is fmt</h3>
+<p>fmt is a tool that automaically  format source code</p>
+<h2 id="2--do-what">2.  do what?</h2>
+<p>The <code>gofmt</code> program (also available as <code>go fmt</code>, which operates at the package level rather than source file level) reads a Go program and emits the source in a standard style of indentation and vertical alignme</p>
 
     </div>
 
@@ -188,12 +189,12 @@
 <footer class="post-footer">
       
       <nav class="post-nav">
-        <a class="prev" href="/post/base/data-type-data-structure/">
+        <a class="prev" href="/post/golang/enum/">
             <i class="iconfont icon-left"></i>
             <span class="prev-text nav-default"></span>
             <span class="prev-text nav-mobile">Prev</span>
           </a>
-        <a class="next" href="/post/base/operate/linux/">
+        <a class="next" href="/post/golang/gomico/">
             <span class="next-text nav-default"></span>
             <span class="next-text nav-mobile">Next</span>
             <i class="iconfont icon-right"></i>

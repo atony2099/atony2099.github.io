@@ -6,10 +6,19 @@
     <description>Recent content in Posts on atony2099 develop note</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 30 Sep 2020 14:10:34 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 11 Oct 2020 20:16:30 +0800</lastBuildDate>
     
 	<atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Go基础1, 函数 function</title>
+      <link>http://localhost:1313/post/golang/function/</link>
+      <pubDate>Sun, 11 Oct 2020 20:16:30 +0800</pubDate>
+      
+      <guid>http://localhost:1313/post/golang/function/</guid>
+      <description>函数是每门编程语言重要组成部分，golang作为一门现代化的语言，函数上有自己的一些特点 特点 1. 支持可变参数函数(variadic function) 如果一个函</description>
+    </item>
     
     <item>
       <title>短变量声明</title>
@@ -206,6 +215,15 @@ feature if a methods is called, the receiver will be copy every time;</descripti
     
     <item>
       <title></title>
+      <link>http://localhost:1313/post/base/data-type-data-structure/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/post/base/data-type-data-structure/</guid>
+      <description>program basic What is the difference between a composite data type and a data structure? Data Types and Data Structures variables a container(memory address) hold a value; a variable have a specific type what is a data type? 具有相同属性的一类数据； primitive; 基本类型 compositive: composed of primitive types. what is a data structure? 通用的术语</description>
+    </item>
+    
+    <item>
+      <title></title>
       <link>http://localhost:1313/post/base/operate/io/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
@@ -220,6 +238,15 @@ feature if a methods is called, the receiver will be copy every time;</descripti
       
       <guid>http://localhost:1313/post/base/operate/linux/</guid>
       <description>linux reference Introduction of System Call System Call in OS: Types and Examples overview linux mechanism Linux command mechanism 1. linux base structure kernel space vs user spacce 1. the difference between kernel and user space memroy: the memory is divided into two distinct areas, user and kernel Access: kernel:full access limit access 1.the system call 1. what is ? a user program request a service from the kernel 2.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost:1313/post/base/operate/my-plane/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/post/base/operate/my-plane/</guid>
+      <description>my plane: 1.finish function 2. finish methods 3. </description>
     </item>
     
     <item>
@@ -324,6 +351,19 @@ Built-in operators    Operation Result Description     0011 &amp;amp; 0101 0001 
     
     <item>
       <title></title>
+      <link>http://localhost:1313/post/golang/fmt/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/post/golang/fmt/</guid>
+      <description>golang 50 Shades of Go: Traps, Gotchas, and Common Mistakes for New Golang Devs
+effective go
+The Go Programming Language Specification
+fmt 1. what is fmt fmt is a tool that automaically format source code
+2. do what? The gofmt program (also available as go fmt, which operates at the package level rather than source file level) reads a Go program and emits the source in a standard style of indentation and vertical alignme</description>
+    </item>
+    
+    <item>
+      <title></title>
       <link>http://localhost:1313/post/golang/gomico/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
@@ -347,7 +387,7 @@ Built-in operators    Operation Result Description     0011 &amp;amp; 0101 0001 
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/post/golang/kafka/</guid>
-      <description></description>
+      <description>kafka zookeeper </description>
     </item>
     
     <item>
@@ -397,6 +437,15 @@ Built-in operators    Operation Result Description     0011 &amp;amp; 0101 0001 
       <guid>http://localhost:1313/post/golang/template/</guid>
       <description>template 1. syntax The templating language contains a rich set of control structures to render your HTML. Here you will get an overview of the most commonly used ones. To get a detailed list of all possible structures visit: text/template
 basic syntax    Control Structure Definition     {{/* a comment */}} Defines a comment   {{.}} Renders the root element   {{.Title}} Renders the “Title”-field in a nested element   {{if .</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost:1313/post/golang/trace/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/post/golang/trace/</guid>
+      <description>链路跟踪 1. 是什么？ 跟踪一个请求全流程 2. opentracing() 2. 基础概念 trace:一个完整请求 span: tags</description>
     </item>
     
     <item>

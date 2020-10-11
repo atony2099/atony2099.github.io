@@ -112,6 +112,93 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/golang/readwrite/"></a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 0001-01-01 </span>
+      
+        <span class="more-meta"> 61 words </span>
+        <span class="more-meta"> 1 min read </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      log log files Read Write inteface i/o的读写只是两个简单的协议 1 2 3 4 5 6 7 8 9 10 // read to []byte type Reader interface { Read(p []byte) (n int, err error) } // write from []byte type Writer interface { Write(p []byte) (n int, err error) }
+    </div>
+    <div class="read-more">
+      <a href="/post/golang/readwrite/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/golang/reflect/"></a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 0001-01-01 </span>
+      
+        <span class="more-meta"> 20 words </span>
+        <span class="more-meta"> 1 min read </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      reflect 1. what is ? 运行时操作对象 1. 使用场景 struct to map
+    </div>
+    <div class="read-more">
+      <a href="/post/golang/reflect/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/golang/regex/"></a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 0001-01-01 </span>
+      
+        <span class="more-meta"> 0 words </span>
+        <span class="more-meta"> 0 mins read </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      
+    </div>
+    <div class="read-more">
+      <a href="/post/golang/regex/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/golang/string/"></a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 0001-01-01 </span>
+      
+        <span class="more-meta"> 139 words </span>
+        <span class="more-meta"> 1 min read </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      string what is  a read-only slice of bytes;   a strings can hold arbitrary byte sequence, even they are not always valid UFT-8 byte sequence for:  const sample = &quot;\xbd\xb2\x3d\xbc\x20\xe2\x8c\x98&quot; will print mess; ��=� ⌘
+  A string literal, absent byte-level escapes, always holds valid UTF-8 sequences.
+     java use uft-16
+    internal implement 1 2 3 4  type StringHeader struct { Data uintptr Len int }   back quote vs double quote   back quote: will not escape characters
+    </div>
+    <div class="read-more">
+      <a href="/post/golang/string/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/golang/template/"></a></h1>
     <div class="post-meta">
       <span class="post-time"> 0001-01-01 </span>
@@ -132,70 +219,6 @@ basic syntax    Control Structure Definition     {{/* a comment */}} Defines a c
   </div>
 </article>
 
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/golang/vscode/"></a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 0001-01-01 </span>
-      
-        <span class="more-meta"> 5 words </span>
-        <span class="more-meta"> 1 min read </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      vscode install install go tool;
- 
-    </div>
-    <div class="read-more">
-      <a href="/post/golang/vscode/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/micro/base/"></a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 0001-01-01 </span>
-      
-        <span class="more-meta"> 36 words </span>
-        <span class="more-meta"> 1 min read </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      基础概念 ##服务: 熔断 降级 熔断: 被动 降级: 主动 使用本地方法替换远程服务。
-    </div>
-    <div class="read-more">
-      <a href="/post/micro/base/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/micro/grpc/"></a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 0001-01-01 </span>
-      
-        <span class="more-meta"> 176 words </span>
-        <span class="more-meta"> 1 min read </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      rpc Compare gRPC services with HTTP APIs base concepts stub stub is a piece of code used to be a a temporary substitute for yet-to-be-developed code. or the remote methods; 1 2 3 4 5 6 7 8 temperature = ThermometerRead(Outside) if temperature &gt; 40 then print &#34;It is hot!&#34; end if function ThermometerRead(Source insideOrOutside) return 28 end function what is rpc ? remote procedure call: excute a procedure(a set
-    </div>
-    <div class="read-more">
-      <a href="/post/micro/grpc/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
     </section>
   
   <nav class="pagination">
@@ -203,7 +226,10 @@ basic syntax    Control Structure Definition     {{/* a comment */}} Defines a c
         <i class="iconfont icon-left"></i>
         <span class="prev-text">Prev</span>
       </a>
-    
+    <a class="next" href="/page/10/">
+        <span class="next-text">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
   </nav>
         </div>
         

@@ -112,71 +112,28 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/golang/base/"></a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/golang/trace/"></a></h1>
     <div class="post-meta">
       <span class="post-time"> 0001-01-01 </span>
       
-        <span class="more-meta"> 25 words </span>
+        <span class="more-meta"> 39 words </span>
         <span class="more-meta"> 1 min read </span>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      golang golang 特性 1. 轻类型；去掉类型； type+ methods 方式 2. 支持高并发 3.
+      链路跟踪 1. 是什么？ 跟踪一个请求全流程 2. opentracing() 2. 基础概念 trace:一个完整请求 span: tags
     </div>
     <div class="read-more">
-      <a href="/post/golang/base/" class="read-more-link">Read more...</a>
+      <a href="/post/golang/trace/" class="read-more-link">Read more...</a>
     </div>
   </div>
 </article>
 
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/golang/bitwise/"></a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 0001-01-01 </span>
-      
-        <span class="more-meta"> 60 words </span>
-        <span class="more-meta"> 1 min read </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      bitwise Bitwise operators [cheat sheet]
-Built-in operators    Operation Result Description     0011 &amp; 0101 0001 Bitwise AND   0011 | 0101 0111 Bitwise OR   0011 ^ 0101 0110 Bitwise XOR   ^0101 1010 Bitwise NOT (same as 1111 ^ 0101)   0011 &amp;^ 0101 0010 Bitclear (AND NOT)   00110101&lt;&lt;2 11010100 Left shift   00110101&lt;&lt;100 00000000 No upper limit on shift count   00110101&gt;&gt;2 00001101 Right shift    
-    </div>
-    <div class="read-more">
-      <a href="/post/golang/bitwise/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/golang/command/"></a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 0001-01-01 </span>
-      
-        <span class="more-meta"> 9 words </span>
-        <span class="more-meta"> 1 min read </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      command spaw a process 1  dateCmd := exec.Command(&#34;date&#34;)   11
-    </div>
-    <div class="read-more">
-      <a href="/post/golang/command/" class="read-more-link">Read more...</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/golang/concurrency/"></a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/golang/vscode/"></a></h1>
     <div class="post-meta">
       <span class="post-time"> 0001-01-01 </span>
       
@@ -187,31 +144,53 @@ Built-in operators    Operation Result Description     0011 &amp; 0101 0001 Bitw
   
   <div class="post-content">
     <div class="post-summary">
-      golang 并发模式
+      vscode install install go tool;
+ 
     </div>
     <div class="read-more">
-      <a href="/post/golang/concurrency/" class="read-more-link">Read more...</a>
+      <a href="/post/golang/vscode/" class="read-more-link">Read more...</a>
     </div>
   </div>
 </article>
 
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/golang/context/"></a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/micro/base/"></a></h1>
     <div class="post-meta">
       <span class="post-time"> 0001-01-01 </span>
       
-        <span class="more-meta"> 6 words </span>
+        <span class="more-meta"> 36 words </span>
         <span class="more-meta"> 1 min read </span>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      context pass value pass request-scoped data;
+      基础概念 ##服务: 熔断 降级 熔断: 被动 降级: 主动 使用本地方法替换远程服务。
     </div>
     <div class="read-more">
-      <a href="/post/golang/context/" class="read-more-link">Read more...</a>
+      <a href="/post/micro/base/" class="read-more-link">Read more...</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/micro/grpc/"></a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 0001-01-01 </span>
+      
+        <span class="more-meta"> 176 words </span>
+        <span class="more-meta"> 1 min read </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      rpc Compare gRPC services with HTTP APIs base concepts stub stub is a piece of code used to be a a temporary substitute for yet-to-be-developed code. or the remote methods; 1 2 3 4 5 6 7 8 temperature = ThermometerRead(Outside) if temperature &gt; 40 then print &#34;It is hot!&#34; end if function ThermometerRead(Source insideOrOutside) return 28 end function what is rpc ? remote procedure call: excute a procedure(a set
+    </div>
+    <div class="read-more">
+      <a href="/post/micro/grpc/" class="read-more-link">Read more...</a>
     </div>
   </div>
 </article>
@@ -219,14 +198,11 @@ Built-in operators    Operation Result Description     0011 &amp; 0101 0001 Bitw
     </section>
   
   <nav class="pagination">
-    <a class="prev" href="/page/6/">
+    <a class="prev" href="/page/9/">
         <i class="iconfont icon-left"></i>
         <span class="prev-text">Prev</span>
       </a>
-    <a class="next" href="/page/8/">
-        <span class="next-text">Next</span>
-        <i class="iconfont icon-right"></i>
-      </a>
+    
   </nav>
         </div>
         
